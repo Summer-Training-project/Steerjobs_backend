@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+.section
+{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background:#F7E8F6 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.section .container
+{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 500px;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.section  .container {
+    box-shadow: 0px 0px 20px rgb(58, 57, 57);
+}
+
+.section .container .content-img, .section .container .content-form 
+{
+    position: relative;
+    width: 60%;
+    height: 100%;
+    display: flex;
+}
+.section .container .content-form 
+{
+    width: 40%;
+    text-align: center;
+    Background-color: rgb(218, 245, 245);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section .container .content-img img
+{
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+.section .container .content-form .form-content
+{
+    position: relative;
+    margin: 10px 12%;
+    text-align: left;
+}
+
+.section .container .content-form form h2
+{
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+    margin-top: 30px 0 20px 0;
+    color: #555;
+    font-family: 'Noto Serif', serif;
+
+}
+.section .container .content-form form input
+{
+    position: relative;
+    width: 100%;
+    padding: 10px 20px;
+    background: #f5f5f5;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 8px 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    border-radius: 4px;
+    background-color: rgb(214, 224, 224);
+}
+
+::placeholder {
+    color: rgb(92, 92, 92);
+}
+
+.section .container .content-form form P {
+    font-family: 'Noto Serif', serif;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+
+.section .container .content-form form input[type="submit"]
+{
+    max-width: 100px;
+    background: #677eff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.section .container .content-form form input[type="submit"]:hover {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24), 0 3px 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.section .container .content-form form .signup
+{
+    position: relative;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color:#555;
+    text-transform: uppercase;
+    font-weight: 300;    
+
+}
+.section .container .content-form form .signup a
+{
+    font-weight: 600;
+    text-decoration: none;
+    columns: #677eff;
+}
+
+#get-job, #feature {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    Background-color: rgb(218, 245, 245);
+
+}
+
+#get-job .job-heading, #get-job .job-link {
+    width: 50%;
+    height: 100vh;
+    padding: 10%;
+}
+
+#get-job  .job-link {
+    padding: 4%;
+}
+
+#get-job .job-heading #job2 {
+    font-size: 60px;
+    font-family: cursive;
+}
+
+#get-job .job-heading #job3 {
+    font-size: 27px;
+    font-family: verdana;
+}
+
+
+#get-job .job-link a, #get-job .job-link a,
+#post-job .post-link a, #post-job .post-link a,
+#connect .connect-content a, #connect .connect-content a{
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.616);
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 162, 177);
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 15px;
+    font-family: Georgia;
+    display: inline-block;
+}
+
+#get-job .job-link a:hover, #get-job .job-link a:active,
+#post-job .post-link a:hover, #post-job .post-link a:active,
+#connect .connect-content a:hover, #connect .connect-content a:active {
+
+    background-color: rgb(250, 249, 189);
+    color: rgb(250, 7, 59);
+}
+
+#post-job {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    height: 250px;
+
+}
+
+#post-job .post-heading {
+    width: 50%;
+    padding: 0 10%;
+
+}
+ 
+#post-job .post-link {
+    width: 50%;
+    padding: 0 5%;
+}
+
+#post-job {
+    background-color: rgb(255, 228, 228);
+}
+
+#post-job .post-heading #post2 {
+    font-size: 35px;
+    font-family: tahoma;
+    color: rgb(148, 45, 31)
+}
+
+#feature {
+    padding: 5%;
+}
+
+.feature-content, .picture, .connect-picture, .connect-content {
+    width: 50%;
+    height: 100vh;
+    padding: 4%;
+}
+
+#feature2, #connect2 {
+    display: flex;
+    font-size: 35px;
+    font-family: tahoma;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    justify-content: center;
+    padding: 60px 0 0;
+}
+
+#para1 {
+    display: flex;
+    color: rgb(31, 65, 65);
+    font-size: 25px;
+    font-family: 'Noto Serif', serif;
+    text-align: center;
+    justify-content: center
+}
+
+
+.picture {
+    border-radius: 50%;
+    padding: 6%;
+}
+
+#connect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    Background-color: rgb(195, 238, 238);
+    width: 100%;
+    height: 100vh;
+}
+.connect-picture{
+    border-radius: 50%;
+    padding: 7%;
+    
+
+}
+#connect2 {
+    font-family: 'Noto Serif', serif;
+    padding: 70px 20px 0 ;
+    text-align: center;
+   
+}
+.connect-content{
+    text-align: center;
+}
