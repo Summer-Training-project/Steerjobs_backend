@@ -21,9 +21,12 @@
                 <img src="https://img.freepik.com/free-vector/businessman-interviewing-virtual-job-candidate-from-laptop-desk-purple-background-maintaining-social-distance_1302-22848.jpg?size=626&ext=jpg" alt="" />
             </div>
             <div class="content-form">
-                <form method="POST" action="">
+                <form method="POST" action="/auth/login">
                     <p><b>Make the most of your PROFESSIONAL LIFE</b></p>
                     <h2><b>Sign In</b></h2>
+                    <div class="form-content" style="text-align: center;">
+                        <span style="color: red;">{{messageInfo}}</span>    
+                    </div>
                     <div class="form-content">
                         <input type="text" name="userId" placeholder="Username">
                     </div>

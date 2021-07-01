@@ -24,10 +24,12 @@
             </div>
 
             <div= class="content-form">
-                <form method="POST" action="">
+                <form method="POST" action="/auth/register">
                     <p><b>Make the most of your PROFESSIONAL LIFE</b></p>
                     <h2><b>SIGN UP</b></h2>
-                
+                    <div class="form-content" style="text-align: center;">
+                        <span style="color: red;">{{messageInfo}}</span>    
+                    </div>
                     <div class="form-content">
                         <input type="text" name="name" placeholder="Full name">
                     </div>
