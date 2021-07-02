@@ -1,12 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Document</title>
+    <title>Feed | Steerjobs</title>
+    <script src="https://kit.fontawesome.com/b8afffe50a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body style="text-align: center;">
-    <h1>We are in feed page</h1>
-    <h1>{{name}}</h1>
-    <h1>{{userId}}</h1>
-    <h1>{{email}}</h1>
+
+<body>
+    <nav class="nav">
+        <div class="nav-logo">
+            <a class="nav-logo-link" href="/home"><b>SteerJobs</b></a>
+        </div>
+        <div class="nav-container-link">
+            <a class="nav-link" href="/about">ABOUT</a>
+            <a class="nav-link" href="/login">{{signinAndProfile}}</a><!--SIGN-IN-->
+            <a class="nav-link-signup" href="/signup">{{signupAndSignout}}</a><!--Sign-Up-->
+        </div>
+    </nav>
+    <main class="feed-main-container">
+        <aside class="feed-left-container">
+            <div class="card-profile">
+                <div class="card-profile-section">
+                    <div class="card-head-design"></div>
+                    <div class="profile-link-container">
+                        <a class="profile-link" href="profile.html">
+                            <div class="profile-img">
+                                <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
+                            </div>
+                            <div class="welcome-mgs">
+                                <h1>Welcome, {{userName}}!</h1>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="profile-add-img">
+                        <a href="#">Add a Photo</a>
+                    </div>
+                </div>
+                <div class="card-profile-section">
+                    <div class="connection-info">
+                        <a href="#" class="connection-info-link">
+                            <h6><span class="name">Connections</span> <span class="number">4</span></h6>
+                            <h5>Grow your network</h5>
+                        </a>
+                        <a href="#" class="Invitattions-info-link">
+                            <h6><span class="name">Connections</span> <span class="number">4</span></h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-profile">
+                <div class="discover-more">
+                    <h3>Discover more</h3>
+                    <div class="find-person">
+                        <a href="#">Find a person you know</a>
+                    </div>
+                    <div class="post-jobs">
+                        <a href="#">Post a jobs</a>
+                    </div>
+                    <div class="Search-jobs">
+                        <a href="#">Search for a job</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="card-discover">
+                Upcoming features 
+            </div> -->
+        </aside>
+        <main class="feed-middle-container">
+            <section class="post-something">
+                <div class="post-containear">
+                    <div class="profile-img-content">
+                        <a href="#">
+                            <div class="profile-img">
+                                <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="post-content-input">
+                        <form action="" method="POST">
+                            <div class="write-something">
+                                <input type="text" class="write-something-text" name="postTextContent"
+                                    placeholder="What's on your mind?">
+                            </div>
+                            <div class="upload-img">
+                                <input type="file" class="write-something-img" name="postImgContent">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section class="user-post-feed">
+                <div class="post-user-info">
+                    <a href="#">
+                        <div class="profile-img">
+                            <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
+                        </div>
+                        <div class="user-name-skill">
+                            <h1 class="user-name">Karan Jangir</h1>
+                            <h5 class="user-skill">Learner || Android Developer || Technical Writer || ...</h5>
+                            <!-- we have to update latter -->
+                            <!-- <h6 class="user-post-time"></h6> -->
+                        </div>
+                    </a>
+                </div>
+                <div class="post-content">
+                    <p class="post-content-para"> Hello everyone, <br />
+                        I am happy to share that my 10 articles have been published by GeeksforGeeks . Writing articles
+                        always helps us to enhance our skills and share our learnings with the whole world.
+                        GeeksForGeeks provides an amazing platform to learn, write and grow. <br />
+                        Aspiring ahead to write many more..... <br /><br />
+
+                        You can check all my articles here:
+                    </p>
+                    <div class="post-content-img">
+                        <img src="https://homejobonline.co.in/img/online-data-entry-work-from-home-without-investment.svg"
+                            alt="" />
+                    </div>
+                </div>
+                <div class="post-like-comment">
+                    <div class="info-like-comments">
+                        <pre> <span> 28  <i class="fas fa-thumbs-up"></i> . 5  comments </span> </pre>
+                    </div>
+                    <div class="give-like-comments">
+                        <a href="javascript:void(0)" onclick="toggleLike(this)"><i class="fas fa-thumbs-up"></i>
+                            like</a>
+                        <a href="javascript:void(0)" onclick="toggleComments(this)"><i class="fas fa-comment-dots"></i>
+                            comments </a>
+                    </div>
+                    <div id="post-comments-container" class="post-comments">
+                        <div class="profile-img-content">
+                            <div class="profile-img">
+                                <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
+                            </div>
+                        </div>
+                        <div class="post-content-input">
+                            <form action="" method="POST">
+                                <div class="write-something">
+                                    <input type="text" class="write-something-text" name="postTextContent"
+                                        placeholder="Add a comments">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <aside class="feed-right-container">
+            <div class="jobs">
+                <ul>
+                    <div class="top-jobs-list">
+                        <h3>Finds Jobs</h3>
+                        <a class="nav-list-jobs" href="#">
+                            <li>
+                                <h4>Techops Engineer</h4>
+                                <h5>airtel | Gurugram, Haryana, India.</h5>
+                                <h6>178 applicants</h6>
+                            </li>
+                        </a>
+                        <a class="nav-list-jobs" href="#">
+                            <li>
+                                <h4>Techops Engineer</h4>
+                                <h5>airtel | Gurugram, Haryana, India.</h5>
+                                <h6>178 applicants</h6>
+                            </li>
+                        </a>
+                        <a class="nav-list-jobs" href="#">
+                            <li>
+                                <h4>Techops Engineer</h4>
+                                <h5>airtel | Gurugram, Haryana, India.</h5>
+                                <h6>178 applicants</h6>
+                            </li>
+                        </a>
+                        <a class="nav-list-jobs" href="#">
+                            <li>
+                                <h4>Techops Engineer</h4>
+                                <h5>airtel | Gurugram, Haryana, India.</h5>
+                                <h6>178 applicants</h6>
+                            </li>
+                        </a>
+                        <a class="nav-list-jobs" href="#">
+                            <li>
+                                <h4>Techops Engineer</h4>
+                                <h5>airtel | Gurugram, Haryana, India.</h5>
+                                <h6>178 applicants</h6>
+                            </li>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+            <div class="footer-feed">
+                <footer>
+                    <div class="footer-link">
+                        <a href="#">About</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy & Terms</a>
+                        <a href="#">Contact SteerJobs</a>
+                    </div>
+                    <div class="footer-social-link">
+                        <a href="#" class="fb-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="inst-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="In-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="youtb-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="twit-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="footer-copy-right">
+                        <span>SteerJobs</span> &copy;2021
+                    </div>
+                </footer>
+            </div>
+        </aside>
+        <!-- <footer>working soon</footer> -->
+    </main>
+    <script src="/assets/js/index.js"></script>
 </body>
+
 </html>

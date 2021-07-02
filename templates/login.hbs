@@ -11,9 +11,27 @@
             align-items: flex-start;
             padding: 5% 0;
         }
+
+        .section, .nav {
+            background-color:#F7E8F6 ;
+        }
+
+        .section {
+            height: calc(100vh - 60px);
+        }
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <div class="nav-logo">
+            <a class="nav-logo-link" href="/home"><b>SteerJobs</b></a>
+        </div>
+        <div class="nav-container-link">
+            <a class="nav-link" href="/about">ABOUT</a>
+            <a class="nav-link" href="/login">{{signinAndProfile}}</a><!--SIGN-IN-->
+            <a class="nav-link-signup" href="/signup">{{signupAndSignout}}</a><!--Sign-Up-->
+        </div>
+    </nav>
     <section class="section">
         <div class="container">
             <div class="content-img">

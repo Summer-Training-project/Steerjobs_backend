@@ -138,6 +138,7 @@ nav a
     height:100%;
     width:60%;
     align-items: center;
+    padding: 0 45px;
 }
 
 .head-img img {
@@ -149,7 +150,6 @@ nav a
 .section
 {
     position: relative;
-    min-height: 100vh;
     width: 100%;
     background:#F7E8F6 ;
     display: flex;
@@ -288,16 +288,12 @@ nav a
     width: 100%;
     height: 100vh;
     Background-color: rgb(218, 245, 245);
-
 }
 
 #get-job .job-heading, #get-job .job-link {
     width: 50%;
     height: 100vh;
     padding: 10%;
-}
-
-#get-job .job-heading, #get-job .job-link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -317,6 +313,11 @@ nav a
     flex-direction: column;
     width: 55%;
     padding: 8%;
+    align-items: flex-start;
+}
+
+#get-job .job-link-heading {
+    text-align: left;
 }
 
 #get-job .job-link-heading #job3 {
@@ -326,7 +327,7 @@ nav a
 }
 
 #get-job .job-link .job-content-link {
-    text-align: center;
+    text-align: left;
 }
 
 #get-job .job-link a, #get-job .job-link a,
@@ -446,4 +447,517 @@ nav a
 }
 .connect-content{
     text-align: center;
+}
+
+
+
+/* 
+    feed css code
+*/
+
+.feed-main-container {
+    width: 100%;
+    /* border: 1px solid red; */
+    padding: 50px 7% 0 7%;
+    /* min-height: calc(100vh - 60px); */
+    display: grid;
+    grid-template-columns: 20% auto 25%;
+    grid-column-gap: 2%;
+}
+
+.feed-main-container .feed-left-container {
+    /* border: 1px solid red; */
+}
+
+.feed-main-container .feed-left-container .card-profile {
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.feed-left-container .card-profile .card-head-design {
+    min-height: 50px;
+    background-image: linear-gradient(to right, teal,seagreen,cadetblue);
+    width: 100%;
+}
+
+.feed-left-container .card-profile .profile-link-container {
+    text-align: center;
+    padding: 10px 16px;
+    width: 100%;
+    
+}
+
+.feed-left-container .card-profile  .card-profile-section {
+    border: 1px solid rgba(0,0,0,0.15);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.feed-left-container .card-profile .profile-link-container .profile-link {
+    width: 100%;
+    display: block;
+    text-decoration: none;
+    height: 70px;
+    /* border: 1px solid red; */
+}
+
+.feed-left-container .profile-link-container .profile-link .profile-img {
+    width: 65px;
+    height: 65px;
+    /* border: 1px solid red; */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 50%;
+    top: -45px;
+    transform: translate(-50%);
+    border: 1px solid rgb(0 0 0 / 15%);
+    background-color: #efefef;
+    overflow: hidden;
+}
+
+.feed-left-container .profile-link .profile-img img {
+    width: 100%;
+    height: 100%;
+    /* change color for this  */
+}
+
+.feed-left-container .profile-link-container .profile-link .welcome-mgs {
+    margin-top: -20px;
+}
+
+.feed-left-container .profile-link .welcome-mgs h1 {
+    color: #333;
+    font-size: 16px;
+    /* add font-family to welcome mssg  */
+}
+
+.feed-left-container .card-profile .profile-link-container .profile-link:hover .welcome-mgs h1, .feed-left-container .card-profile .profile-add-img a:hover {
+    text-decoration: underline;
+}
+
+.feed-left-container .card-profile .profile-add-img {
+    padding: 0 0 20px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.feed-left-container .card-profile .profile-add-img a {
+    color: blue;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.feed-left-container .card-profile .connection-info {
+    padding: 10px 0;
+}
+
+.feed-left-container .card-profile .connection-info-link,
+.feed-left-container .card-profile .Invitattions-info-link {
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+.feed-left-container .card-profile .connection-info-link:hover,
+.feed-left-container .card-profile .Invitattions-info-link:hover {
+    background-color: #cdcdcd;
+}
+
+.feed-left-container .card-profile .connection-info-link h6,
+.feed-left-container .card-profile .Invitattions-info-link h6 {
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+}
+
+.feed-left-container .card-profile .connection-info-link h6 .number,
+.feed-left-container .card-profile .Invitattions-info-link h6 .number {
+    color: blue;
+}
+
+.feed-left-container .card-profile .connection-info-link h5 {
+    color: #333;
+    font-size: 12px;
+}
+
+.feed-left-container .card-profile .discover-more {
+    padding: 20px 0px;
+}
+
+.feed-left-container .card-profile .discover-more h3 {
+    font-size: 14px;
+    color: #333;
+    padding: 5px 14px;
+}
+
+.feed-left-container .card-profile .discover-more a {
+    color: #555;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    padding: 6px 14px;
+    width: 100%;
+}
+
+.feed-left-container .card-profile .discover-more a:hover {
+    background-color: #efefef;
+}
+
+.feed-main-container .feed-middle-container {
+    /* border: 1px solid rebeccapurple; */
+    /* overflow-y: auto; */
+    height: auto;
+    overflow-x: hidden;
+}
+
+.feed-main-container .feed-middle-container .post-something {
+    width: 100%;
+    height: 91px;
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.feed-main-container .post-something .post-containear {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.feed-main-container .post-something .post-containear .profile-img-content {
+    width: 9%;
+    margin: 0 5px;
+}
+
+.feed-main-container .post-something .profile-img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #efefef;
+    overflow: hidden;
+}
+
+.feed-main-container .post-something .profile-img img {
+    width: 95%;
+    height: 95%;
+    /* border: 1px solid red; */
+}
+
+.feed-main-container .post-something .post-content-input {
+    /* border: 1px solid red; */
+    width: 88%;
+}
+
+.feed-main-container .post-something .post-content-input form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.feed-main-container .post-something .post-content-input form .write-something {
+    width: 85%;
+    height: 100%;
+    /* border: 1px solid red; */
+    margin: 0 5px;
+}
+
+.feed-main-container .post-something .post-content-input form .write-something input {
+    border: 1px solid rgb(0 0 0 / 15%);
+    outline: none;
+    border-radius: 16px;
+    background-color: #efefef;
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 12px;
+    height: 60px;
+}
+
+.feed-main-container .post-something .post-content-input form .write-something input:focus {
+    border: 1px solid #007bff;
+}
+
+.feed-main-container .post-something form .upload-img  {
+    width: 15%;
+    height: 100%;
+}
+
+.feed-main-container .post-something form .upload-img  .write-something-img::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+.feed-main-container .post-something form .upload-img  .write-something-img::before {
+    content: '';
+    position: relative;
+    top: 4px;
+    display: inline-block;
+    width: 75px;
+    height: 55px;
+    /* border: 1px solid rgb(0 0 0 / 15%); */
+    /* border-radius: 6px; */
+    outline: none;
+    cursor: pointer;
+    background-image: url("https://cdn.icon-icons.com/icons2/2622/PNG/512/gui_gallery_icon_157643.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 8px, 2px;
+}
+.feed-main-container .post-something form .upload-img  .write-something-img:hover::before {
+    background-color: #f8f2f2;
+}
+
+.feed-main-container .user-post-feed {
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-radius: 12px;
+}
+
+.feed-main-container .user-post-feed .post-user-info a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.feed-main-container .user-post-feed .profile-img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #efefef;
+    overflow: hidden;
+}
+
+.feed-main-container .user-post-feed .profile-img img {
+    width: 95%;
+    height: 95%;
+}
+
+.feed-main-container .user-post-feed .user-name-skill {
+    padding: 0 8px;
+}
+
+.feed-main-container .user-post-feed .user-name-skill h1 {
+    font-size: 14px;
+    color: #000;
+}
+
+.feed-main-container .user-post-feed .user-name-skill h1:hover {
+    text-decoration: underline;
+} 
+
+.feed-main-container .user-post-feed .user-name-skill h5 {
+    font-size: 12px;
+    color: #333;
+}
+
+.feed-main-container .user-post-feed .post-content{
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.feed-main-container .user-post-feed .post-content-img {
+    width: 100%;
+    height: 500px;
+}
+
+.feed-main-container .user-post-feed .post-content-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.feed-main-container .user-post-feed .post-like-comment {
+    padding: 8px 16px;
+}
+
+.feed-main-container .user-post-feed .info-like-comments {
+    color: #333;
+    padding: 8px 0;
+    font-size: 11px;
+    border-bottom: 0.5px solid rgb(0 0 0 / 15%);
+}
+
+.feed-main-container .user-post-feed .info-like-comments i {
+    color: #007bff;
+}
+
+.feed-main-container .user-post-feed .give-like-comments {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px;
+}
+
+.feed-main-container .user-post-feed .give-like-comments a {
+    display: inline-block;
+    padding: 8px 16px;
+    color: #444;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.feed-main-container .user-post-feed .give-like-comments a:hover {
+    background-color: #efefef;
+}
+
+.feed-main-container .user-post-feed .post-comments {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    display: none;
+}
+.feed-main-container .user-post-feed .post-comments .profile-img-content {
+    width: 9%;
+}
+
+.feed-main-container .user-post-feed .post-content-input {
+    width: 91%;
+}
+
+.feed-main-container .user-post-feed .write-something {
+    width: 98%;
+    margin: 0 1%;
+}
+
+.feed-main-container .user-post-feed .write-something input {
+    border: 1px solid rgb(0 0 0 / 15%);
+    outline: none;
+    border-radius: 16px;
+    background-color: #efefef;
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 12px;
+    height: 45px;
+}
+
+.feed-main-container .user-post-feed .write-something input:focus {
+    border: 1px solid #007bff;
+}
+
+
+.feed-main-container .feed-right-container .jobs {
+    padding-bottom: 20px;
+}
+
+.feed-main-container .feed-right-container .top-jobs-list {
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 0px;
+    flex-direction: column;
+} 
+
+.feed-main-container .feed-right-container .top-jobs-list h3 {
+    color: #222;
+    font-family: 16px;
+    text-align: left;
+    padding: 6px 16px;
+}
+
+.feed-main-container .feed-right-container .top-jobs-list a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 0 40px;
+}
+
+.feed-main-container .feed-right-container .top-jobs-list a:hover {
+    background-color: #efefef;
+}
+
+.feed-main-container .feed-right-container .top-jobs-list a h4,
+.feed-main-container .feed-right-container .top-jobs-list a h5,
+.feed-main-container .feed-right-container .top-jobs-list a h6 {
+    margin: 0;
+    padding: 0;
+}
+
+.feed-main-container .feed-right-container .top-jobs-list a h4 {
+    font-size: 14px;
+    color: #333;
+}
+
+
+
+.feed-main-container .feed-right-container .top-jobs-list a h5,
+.feed-main-container .feed-right-container .top-jobs-list a h6 { 
+    font-size: 12px;
+    color: #444;
+}
+
+.feed-main-container .feed-right-container .top-jobs-list a h6 { 
+    color: #555;
+}
+
+.feed-main-container .feed-right-container .footer-feed {
+    padding: 10px 30px;
+    text-align: center;
+}
+
+.feed-main-container .feed-right-container .footer-link a {
+    margin: 5px;
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+} 
+
+.feed-main-container .feed-right-container .footer-link a:hover {
+    text-decoration: underline;
+}
+
+.feed-main-container .feed-right-container .footer-social-link {
+    margin: 20px 0;
+}
+
+.feed-main-container .feed-right-container .footer-social-link a {
+    margin: 5px;
+    color: #aaa;
+}
+
+.feed-main-container .feed-right-container .footer-social-link .fb-link:hover {
+    color: #4267B2;
+}
+
+.feed-main-container .feed-right-container .footer-social-link .inst-link:hover {
+    color: #8a3ab9;
+}
+
+.feed-main-container .feed-right-container .footer-social-link .In-link:hover {
+    color: #2867b2;
+}
+
+.feed-main-container .feed-right-container .footer-social-link .youtb-link:hover {
+    color: #FF0000;
+}
+
+.feed-main-container .feed-right-container .footer-social-link .twit-link:hover {
+    color: #1DA1F2;
 }

@@ -10,7 +10,10 @@ const authUser = (render,redir) => {
         }
         catch (err) {
             if(redir === undefined){
-                res.status(401).render(render);
+                res.status(401).render(render,{
+                    signinAndProfile: 'SIGN-IN',
+                    signupAndSignout: 'Sign-Up'
+                });
             }
             else {
                 res.redirect(redir);

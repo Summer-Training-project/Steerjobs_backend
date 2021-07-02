@@ -5,8 +5,6 @@ const mysql = require('mysql');
 
 const router = express.Router();
 
-let userId = '';
-
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
@@ -32,10 +30,30 @@ const verifyUserInfo = (req, res) => {
 
 
 router.get('/',authUser('index'), (req, res) => {
-    res.redirect('/feed');
+    db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
+        if(error) {
+            res.send('Something Went Wrong!....')
+        }
+        else {
+            res.render('index', {
+                signinAndProfile: results[0].name,
+                signupAndSignout: 'Sign-Out'
+            });
+        }
+    });
 });
 router.get('/home',authUser('index'), (req, res) => {
-    res.redirect('/feed');
+    db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
+        if(error) {
+            res.send('Something Went Wrong!....')
+        }
+        else {
+            res.render('index', {
+                signinAndProfile: results[0].name,
+                signupAndSignout: 'Sign-Out'
+            });
+        }
+    });
 });
 router.get('/login',authUser('login'), (req, res) => {
     res.redirect('/feed');
@@ -44,7 +62,7 @@ router.get('/signup',authUser('signup'), (req, res) => {
     res.redirect('/feed');
 });
 router.get('/about',authUser('about'), (req, res) => {
-    res.redirect('/feed');
+    res.send("Welcome to About Pages!....");
 });
 router.get('/database', (req, res) => {
     res.render('database');
@@ -55,11 +73,10 @@ router.get('/feed',authUser('index','/home'), (req, res) => {
             res.send('Something Went Wrong!....')
         }
         else {
-            userId = results[0].userId;
             res.render('feed', {
-                name: results[0].name,
-                userId: results[0].userId,
-                email: results[0].email
+                signinAndProfile: results[0].name,
+                signupAndSignout: 'Sign-Out',
+                userName: results[0].name
             });
         }
     });
