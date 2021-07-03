@@ -1097,3 +1097,191 @@ nav a
 .feed-main-container .feed-right-container .footer-social-link .twit-link:hover {
     color: #1DA1F2;
 }
+
+
+
+/*
+    profile page css code 
+*/
+
+
+.container-main {
+    display: grid;
+    grid-template-columns: 60px calc(100% - 60px);
+    /* border: 1px solid rebeccapurple; */
+}
+
+
+/*sidebar*/
+.sidebar
+{
+    width: 60px;
+    height: 100%;
+    background-color: rgb(247, 247, 247);
+    text-decoration: none;
+    overflow: hidden;
+    /* border: 1px solid red; */
+}
+.sidebar h5
+{
+    font-size: 12px;
+    font-family: 'Akaya Kanadaka', cursive;
+    text-align: center;
+    line-height: 40px;
+    background-color:rgb(253, 242, 242);
+    letter-spacing: 1px;
+}
+.sidebar ul a
+{
+      display:flex;
+      flex-direction:column ;
+      align-items:center ;
+      height:100%;
+      width:100%;
+      padding:5px;
+      font-family: 'Akaya Kanadaka', cursive;
+      text-decoration: none;
+      border-radius: 6px;
+}
+.sidebar ul a i
+{
+    font-size:23px;
+    line-height: 50px;
+    color:rgb(87, 190, 216); 
+}
+.sidebar ul a span
+{
+    font-size:8px;
+    color:rgb(73, 72, 72);
+}
+.sidebar ul li:hover a
+{
+    background-color:rgba(214, 214, 214, 0.6);
+}
+.sidebar ul li:hover a i
+{
+    color:rgb(22, 154, 187);
+}
+.sidebar ul li:hover a span
+{
+    color:#000;
+    font-size:8px;
+}
+
+/*container*/
+
+.container-main .container
+{
+    /* border: 1px solid rgb(87, 190, 216); */
+    display:grid;
+    grid-template-columns: 50% 50%;
+    background-color: rgb(235, 235, 235);
+    padding: 3%;
+}
+
+.container-left , .container-right {
+    display: grid;
+    background-color: rgb(250, 249, 249);
+    margin: 0 30px;
+}
+
+.container-left
+{
+    grid-template-rows: auto auto;
+}
+.container-right
+{
+    grid-template-rows: 50% 50%;
+}
+.container-right-top ,.container-right-bottom
+{
+    justify-content:space-between;
+    
+}
+
+.container-left .profile-and-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    /* border: 1px solid red */
+}
+
+.container-left .container-left-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/heading.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px 0 10px 0;
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 100%;
+}
+
+.container-left .container-left-picture .profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #efefef;
+}
+
+.container-left .container-left-picture .profile-image img
+{
+    width:100%;
+    height:100%;
+    /* border: 1px solid red; */
+}
+.container-left-heading 
+{
+    padding: 6px 12px;
+    border-bottom: 1px solid rgb(0 0 0 / 15%);
+    text-align: center;
+}
+
+.container-left-head ,.container-right-top-head ,.container-right-bottom-head
+{
+    font-size:20px;
+    font-family: 'Akaya Kanadaka', cursive;
+    /* border: 1px solid red; */
+}
+
+.container-left-text, .container-right-text {
+    /* border: 1px solid red; */
+    padding: 40px;
+}
+
+.content-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+.content-info .info-icon {
+    padding: 10px;
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-info  .info-data {
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.content-info  .info-data .info-name span {
+    font-size: 16px;
+    color: #000;
+}
+
+.content-info .info-data .info-title span {
+    font-size: 12px;
+    color: #333;
+}

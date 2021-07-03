@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const authUser = (render,redir) => {
+const authUser = (render,redir,obj) => {
     return async(req, res, next) => {
         try {
             const tooken = req.cookies.jwt;
@@ -9,11 +9,8 @@ const authUser = (render,redir) => {
             return verifyUser; 
         }
         catch (err) {
-            if(redir === undefined){
-                res.status(401).render(render,{
-                    signinAndProfile: 'SIGN-IN',
-                    signupAndSignout: 'Sign-Up'
-                });
+            if(redir === null){
+                res.status(401).render(render,obj);
             }
             else {
                 res.redirect(redir);
