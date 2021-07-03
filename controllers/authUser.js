@@ -13,7 +13,7 @@ const authUser = (render,redir,obj) => {
                 res.status(401).render(render,obj);
             }
             else {
-                res.redirect(redir);
+                res.status(401).redirect(redir);
             }     
             return err;
         }

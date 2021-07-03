@@ -3,15 +3,18 @@ const authUser = require('../controllers/authUser');
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 
+
 const app = express();
 const router = express.Router();
+
 
 const defalultAuthUserObject = {
     signinAndProfile: 'SIGN-IN',
     signupAndSignout: 'Sign-Up',
     linkSigninAndProfile: '/login',
-    linkSignupAndSignout: '/signup'
+    linkSignupAndSignout: '/signup',
 }
+
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -19,6 +22,7 @@ const db = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE
 });
+
 
 db.connect((err) => {
     if(err) {
@@ -28,6 +32,7 @@ db.connect((err) => {
         console.log("User DataBase  Authentication is Conected!.....");
     }
 });
+
 
 const verifyUserInfo = (req, res) => {
     const tooken = req.cookies.jwt;
@@ -52,6 +57,8 @@ router.get('/',authUser('index',null,defalultAuthUserObject), (req, res) => {
         }
     });
 });
+
+
 router.get('/home',authUser('index',null,defalultAuthUserObject), (req, res) => {
     db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
         if(error) {
@@ -67,25 +74,44 @@ router.get('/home',authUser('index',null,defalultAuthUserObject), (req, res) => 
         }
     });
 });
+
+
 router.get('/login',authUser('login',null,defalultAuthUserObject), (req, res) => {
     res.redirect('/feed');
 });
+
+
 router.get('/signup',authUser('signup',null,defalultAuthUserObject), (req, res) => {
     res.redirect('/feed');
 });
+
+
 router.get('/signout',authUser('login','/login',defalultAuthUserObject), (req, res) => {
-    res.redirect('/feed'); //need to be updated
+    try {
+        res.clearCookie('jwt');
+        console.log("Successfully Logout");
+    } 
+    catch (error) {
+        res.status(500).send(error);
+    }
+    res.redirect('/login');
 });
+
+
 router.get('/about', (req, res) => {
     res.send("Welcome to About Pages!....");
 });
-router.get('/database', (req, res) => {
+
+
+router.get('/database', (req, res) => { 
     res.render('database');
 });
+
+
 router.get('/feed',authUser('index','/home'), (req, res) => {
     db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
         if(error) {
-            res.send('Something Went Wrong!....')
+            res.send('Something Went Wrong!....');
         }
         else {
             res.render('feed', {
@@ -98,6 +124,8 @@ router.get('/feed',authUser('index','/home'), (req, res) => {
         }
     });
 });
+
+
 router.get('/profile',authUser('login','/login'), (req, res) => {
     db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
         if(error) {
@@ -141,8 +169,6 @@ router.get('/profile',authUser('login','/login'), (req, res) => {
         }
     });
 });
-
-
 
 
 module.exports = router;
