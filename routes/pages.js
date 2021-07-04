@@ -98,9 +98,38 @@ router.get('/signout',authUser('login','/login',defalultAuthUserObject), (req, r
 });
 
 
-router.get('/about', (req, res) => {
-    res.send("Welcome to About Pages!....");
+router.get('/about', authUser('about',null,defalultAuthUserObject), (req, res) => {
+    db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
+        if(error) {
+            res.send('Something Went Wrong!....')
+        }
+        else {
+            res.render('about', {
+                linkSigninAndProfile: '/profile',
+                linkSignupAndSignout: '/signout',
+                signinAndProfile: results[0].name,
+                signupAndSignout: 'Sign-Out'
+            });
+        }
+    });
 });
+
+router.get('/jobs/job-search', authUser('signup','/signup',defalultAuthUserObject), (req, res) => {
+    db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
+        if(error) {
+            res.send('Something Went Wrong!....')
+        }
+        else {
+            res.render('jobSearch', {
+                linkSigninAndProfile: '/profile',
+                linkSignupAndSignout: '/signout',
+                signinAndProfile: results[0].name,
+                signupAndSignout: 'Sign-Out'
+            });
+        }
+    });
+});
+
 
 
 router.get('/database', (req, res) => { 

@@ -1,5 +1,6 @@
-var boolComt = false;
-var boolLike = false;
+let boolComt = false;
+let boolLike = false;
+let boolForm = false;
 
 function toggleComments(obj) {
     let elem = document.getElementById('post-comments-container');
@@ -28,4 +29,32 @@ function toggleLike(obj) {
     }
 
     return boolLike;
+}
+
+
+function toggleform() {
+    console.log(boolForm);
+    let elem = document.getElementById('form-container');
+    if(boolForm) {
+        elem.style.width = 0;
+        elem.style.height = 0;
+        setTimeout(() => {
+            elem.style.display = 'none';
+        }, 1000);
+        
+        boolForm = !boolForm;
+    }
+    else {
+
+        elem.style.display = 'flex';
+        setTimeout(() => {
+            elem.style.width = 100 + '%';
+            elem.style.height = 100 + 'vh';
+        }, 500);
+        
+        
+        boolForm = !boolForm;
+    }
+
+    return boolForm;
 }
