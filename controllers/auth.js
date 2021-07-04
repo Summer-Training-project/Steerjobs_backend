@@ -45,7 +45,11 @@ exports.login = async(req, res) => {
         db.query('SELECT * FROM userInfo WHERE userId = ?',[userId], async (error, results) => {
             if(!results[0] || !(await bcrypt.compare(password, results[0].password))) {
                 res.status(401).render('login', {
-                    messageInfo: 'UserId or Password is incorrect'
+                    messageInfo: 'UserId or Password is incorrect',
+                    linkSigninAndProfile: '/login',
+                    linkSignupAndSignout: '/signup',
+                    signinAndProfile: 'SIGN-IN',
+                    signupAndSignout: 'Sign-Up'
                 })
             }
             else {
@@ -67,7 +71,11 @@ exports.login = async(req, res) => {
     }
     catch(error) {
         res.status(401).render('login', {
-            messageInfo: 'UserId or Password is incorrect'
+            messageInfo: 'UserId or Password is incorrect',
+            linkSigninAndProfile: '/login',
+            linkSignupAndSignout: '/signup',
+            signinAndProfile: 'SIGN-IN',
+            signupAndSignout: 'Sign-Up'
         })
     }
 }
@@ -82,6 +90,8 @@ exports.register =(req, res) => {
         if(results.length > 0) {
             return res.render('signup', {
                 messageInfo: 'That userId is already in use',
+                linkSigninAndProfile: '/login',
+                linkSignupAndSignout: '/signup',
                 signinAndProfile: 'SIGN-IN',
                 signupAndSignout: 'Sign-Up'
             });
@@ -94,6 +104,8 @@ exports.register =(req, res) => {
             if(results.length > 0) {
                 return res.render('signup', {
                     messageInfo: 'That userId is already in use',
+                    linkSigninAndProfile: '/login',
+                    linkSignupAndSignout: '/signup',
                     signinAndProfile: 'SIGN-IN',
                     signupAndSignout: 'Sign-Up'
                 });
@@ -131,8 +143,10 @@ exports.register =(req, res) => {
 
                     return res.render('userInfoForm', {
                         userName: name,
-                        signinAndProfile: 'SIGN-IN',
-                        signupAndSignout: 'Sign-Up'
+                        linkSigninAndProfile: '/profile',
+                        linkSignupAndSignout: '/signout',
+                        signinAndProfile: name,
+                        signupAndSignout: 'Sign-Out'
                     });
                 }
             });
