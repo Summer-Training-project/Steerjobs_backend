@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Database Control Board</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        body {
+            width: 100%;
+        }
+        main {
+            width: 1263px;
+        }
+        .form-data, .res {
+            padding: 40px;
+            width: 100%;
+        }
+        div.form-data form {
+            display: flex;
+            margin: 0 auto;
+            flex-direction: column;
+        }
+
+        div.form-data form textarea {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     {{>nav}}
-    <form method="POST" action="/new/database">
+    <main>
+        <div class="res">
         {{Result}}
+    </div>
+    <div class="form-data">
+        <form method="POST" action="/new/database">
+        
         <textarea name="query" cols="30" rows="10"></textarea>
         <input type="submit" value="Submit">
     </form>
+    </div>
+    </main>
 </body>
 </html>
