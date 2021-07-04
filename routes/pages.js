@@ -104,7 +104,12 @@ router.get('/about', (req, res) => {
 
 
 router.get('/database', (req, res) => { 
-    res.render('database');
+    res.render('database', {
+        linkSigninAndProfile: '/login',
+        linkSignupAndSignout: '/logout',
+        signinAndProfile: 'SIGN-IN',
+        signupAndSignout: 'Sign-Up'
+    });
 });
 
 
