@@ -27,11 +27,23 @@ exports.database = (req, res) => {
 
     db.query(query, (err,results) => {
         if(err) {
-            return res.render('database', {Result: err});
+            return res.render('database', {
+                Result: err,
+                linkSigninAndProfile: '/login',
+                linkSignupAndSignout: '/logout',
+                signinAndProfile: 'SIGN-IN',
+                signupAndSignout: 'Sign-Up'
+            });
         }
         else {
             console.log(results);
-            return res.render('database', {Result: JSON.stringify(results)});
+            return res.render('database', {
+                Result: JSON.stringify(results),
+                linkSigninAndProfile: '/login',
+                linkSignupAndSignout: '/logout',
+                signinAndProfile: 'SIGN-IN',
+                signupAndSignout: 'Sign-Up'
+            });
         }
     })
 }
