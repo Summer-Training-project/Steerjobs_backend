@@ -1,11 +1,11 @@
 const mysql = require('mysql');
-const express = require('express');
+// const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 // const authUser = require('../controllers/authUser');
 
 
-const app = express();
+// const app = express();
 
 
 const db = mysql.createConnection({
@@ -89,7 +89,7 @@ exports.register =(req, res) => {
         }
         if(results.length > 0) {
             return res.render('signup', {
-                messageInfo: 'That userId is already in use',
+                messageInfo: 'That Email is already in use',
                 linkSigninAndProfile: '/login',
                 linkSignupAndSignout: '/signup',
                 signinAndProfile: 'SIGN-IN',

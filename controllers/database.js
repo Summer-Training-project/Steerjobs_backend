@@ -1,8 +1,6 @@
 const mysql = require('mysql');
 const express = require('express');
 
-const app = express();
-
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,

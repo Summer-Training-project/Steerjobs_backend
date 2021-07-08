@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 
 
-const app = express();
-const router = express.Router();
+//const app = express();
+const router = express.Router(); //function 
 
 
 const defalultAuthUserObject = {
@@ -40,7 +40,7 @@ const verifyUserInfo = (req, res) => {
     return verifyUser.tokenId;
 }
 
-
+//router.get('/home'); 
 
 router.get('/',authUser('index',null,defalultAuthUserObject), (req, res) => {
     db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
@@ -114,17 +114,147 @@ router.get('/about', authUser('about',null,defalultAuthUserObject), (req, res) =
     });
 });
 
-router.get('/jobs/job-search', authUser('signup','/signup',defalultAuthUserObject), (req, res) => {
+
+router.get('/jobs/search-job', authUser('signup','/signup',defalultAuthUserObject), (req, res) => {
+    db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, userResults) => {
+        if(error) {
+            res.send('Something Went Wrong!....');
+        }
+        else {
+            if(!userResults[0]) {
+                // render the jobSearch page
+                res.render('jobSearch', {
+                // basic informaiton of current user
+                messageInfo: 'There is no post to be displayed',
+                colorCode: '#dc3545',
+                linkSigninAndProfile: '/profile',
+                linkSignupAndSignout: '/signout',
+                signinAndProfile: userResults[0].name,
+                signupAndSignout: 'Sign-Out'
+            })
+
+            } 
+            else {
+
+                db.query('SELECT * FROM postJobs', (error,postResults) => {
+                    if(error) {
+                        console.log(error);
+                    }
+                    else {
+
+                
+                        let routLink = postResults.map((elem,id) => {
+                            
+                            return '/jobs/search-job/id-' + id;
+                        });
+                
+                        // var timestamp = jobResults[0].postDateTime;
+                        // var currentDateTime = new Date.now();
+                        // var timeDiff = currentDateTime - timestamp;
+                
+                        let maxResult = postResults.length;
+
+                
+                        for(let i = 0; i<maxResult; i++) {
+                            router.get('/jobs/search-job/id-' + i, authUser('signup','/signup',defalultAuthUserObject), (req,res) => {
+                
+                                res.render('jobSearch', {
+                                    userResults: userResults[0],
+                                    postResults,
+                                    linkSigninAndProfile: '/profile',
+                                    linkSignupAndSignout: '/signout',
+                                    signinAndProfile: userResults[0].name,
+                                    signupAndSignout: 'Sign-Out',
+                                    postRoutLink: routLink,
+                                    idResults: postResults[i]
+                                });
+                            })
+                        }
+                        res.render('jobSearch', {
+                            userResults: userResults[0],
+                            postResults,
+                            linkSigninAndProfile: '/profile',
+                            linkSignupAndSignout: '/signout',
+                            signinAndProfile: userResults[0].name,
+                            signupAndSignout: 'Sign-Out',
+                            postRoutLink: routLink,
+                            idResults: postResults[0]
+                        });
+                    }
+                })
+            }
+        }
+    });
+});
+
+db.query('SELECT * FROM postJobs', (error,results) => {
+    if(error) {
+        console.log(error);
+    }
+    else {
+
+        // var timestamp = jobResults[0].postDateTime;
+        // var currentDateTime = new Date.now();
+        // var timeDiff = currentDateTime - timestamp;
+
+        let maxResult = results.length;
+
+        for(let i = 0; i<maxResult; i++) {
+            router.get('/jobs/search-job/id-' + i, authUser('signup','/signup',defalultAuthUserObject), (req,res) => {
+
+                db.query('SELECT * FROM postJobs', (error,postResults) => { 
+                    if(error) {
+                       return console.log(error);
+                    }
+                    else {
+                        let routLink = postResults.map((elem,id) => {
+                            return '/jobs/search-job/id-' + id;
+                        });
+                        db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, userResults) => {
+                            if(error) {
+                                console.log(error);
+                            } 
+                            else {
+                                if(!userResults[0]) {
+                                    res.send('Something Went Wrong!....');
+                                }
+                                else {
+                                    res.render('jobSearch', {
+                                        userResults: userResults[0],
+                                        postResults,
+                                        linkSigninAndProfile: '/profile',
+                                        linkSignupAndSignout: '/signout',
+                                        signinAndProfile: userResults[0].name,
+                                        signupAndSignout: 'Sign-Out',
+                                        postRoutLink: routLink,
+                                        idResults: postResults[i]
+                                    });
+                                }
+                            }
+                        })
+                    }
+                })
+            })
+        }
+
+    }
+})
+
+
+router.get('/jobs/post-job', authUser('signup','/signup',defalultAuthUserObject), (req, res) => {
     db.query('SELECT * FROM userinfo WHERE userId = ?',[verifyUserInfo(req, res)], (error, results) => {
         if(error) {
             res.send('Something Went Wrong!....')
         }
         else {
-            res.render('jobSearch', {
+            res.render('postJob', {
                 linkSigninAndProfile: '/profile',
                 linkSignupAndSignout: '/signout',
                 signinAndProfile: results[0].name,
-                signupAndSignout: 'Sign-Out'
+                signupAndSignout: 'Sign-Out',
+                userName: results[0].name,
+                userSkill: results[0].skills,
+                InfoMessage: 'Post a job You have'
             });
         }
     });
@@ -137,7 +267,7 @@ router.get('/database', (req, res) => {
         linkSigninAndProfile: '/login',
         linkSignupAndSignout: '/logout',
         signinAndProfile: 'SIGN-IN',
-        signupAndSignout: 'Sign-Up'
+        signupAndSignout: 'Sign-Up',
     });
 });
 

@@ -4,6 +4,11 @@
 <head>
     <title>SteerJobs</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        footer {
+            background-color: rgb(132 210 210 / 30%);
+        }
+    </style>
 </head>
 
 <body>
@@ -11,8 +16,9 @@
     <header class="head">
         <div class="head-text">
             <h1 class="head1">WELCOME TO A NEW PROFESSIONAL COMMUNITY</h1>
-            <a class="head-button" href="/jobs/job-search"><span class="head-text-link-text">Search for a job</span> <span class="head-text-link-symb">></span> </a>
-            <a class="head-button" href="#"><span class="head-text-link-text">Find a person you know</span> <span class="head-text-link-symb">></span></a>
+            <a class="head-button" href="/jobs/post-job"><span class="head-text-link-text">Post a job</span> <span class="head-text-link-symb">></span> </a>
+            <a class="head-button" href="/jobs/search-job"><span class="head-text-link-text">Search for a job</span> <span class="head-text-link-symb">></span> </a>
+            <a class="head-button" href="/connection/find-new-people"><span class="head-text-link-text">Find a person you know</span> <span class="head-text-link-symb">></span></a>
         </div>
         <div class="head-img">
             <img src="https://homejobonline.co.in/img/online-data-entry-work-from-home.svg" alt="Oops...This page could not be loaded at this moment">
@@ -75,6 +81,7 @@
             <a href="#">Find people you know</a>
         </div>
     </section>
+    {{>footer}}
 </body>
 
 </html>

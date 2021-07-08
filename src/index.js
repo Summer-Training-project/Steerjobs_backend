@@ -1,17 +1,31 @@
 const dotenv = require('dotenv');
-const mysql = require('mysql');
+const mysql = require('mysql'); // database 
 const jwt = require('jsonwebtoken');
-const express = require('express');
+const express = require('express'); // express localhost server nodejs 
+const fileUpload = require('express-fileupload');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const hbs= require('hbs');
 const authUser = require('../controllers/authUser');
+const fs = require('fs');
+
+
 
 const app = express();
 
 
 
 let rootPath = path.join(__dirname, '../');
+
+// fs.mkdir(rootPath + '/piyush',{ recursive: true },(err) => {
+//     if(err) {
+//         console.log(`the error is ${err}`);
+//     }
+//     else {
+//         console.log(`this code is executing properly nice!...`);
+//     }
+// })
+
 
 // dotenv
 dotenv.config({ path: path.join(rootPath, '.env')})
@@ -31,28 +45,29 @@ app.use(express.json());
 app.use(cookieParser());
 
 // use routes page
+app.use(fileUpload());
 app.use('/', require(path.join(rootPath, '/routes/pages')));
-app.use('/auth', require(path.join(rootPath, '/routes/auth')));
+app.use('/auth', require(path.join(rootPath, '/routes/auth'))); 
 app.use('/new', require(path.join(rootPath, '/routes/database')));
-// app.use('/user', require(path.join(rootPath, '/routes/userProfile')));
+app.use('/jobs', require(path.join(rootPath, '/routes/jobs')));
 
 
 
 app.use(express.static(path.join(rootPath, 'public')));
 
 const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
+    host: process.env.DATABASE_HOST, //localhost 
+    user: process.env.DATABASE_USER, //userid
+    password: process.env.DATABASE_PASSWORD, //pass
+    database: process.env.DATABASE //data
 });
 
 db.connect((err) => {
     if(err) {
-        console.log("User DataBase Authentication is Disconected!.....");
+        console.log("User DataBase Authentication is Disconnected!.....");
     }
     else {
-        console.log("User DataBase  Authentication is Conected!.....");
+        console.log("User DataBase  Authentication is Connected!.....");
     }
 });
 

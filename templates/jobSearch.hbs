@@ -14,31 +14,33 @@
     {{>nav}}
     <main class="job-search-container">
         <div class="job-list-container">
-            <div class="info-based-skill">
-                <h3>Jobs based on Your Skills</h3>
+            <div style="color: {{colorCode}}; border-left-color: {{colorCode}};" class="info-based-skill">
+                <h3>{{#if messageInfo}}{{messageInfo}}{{else}}Jobs based on Your Skills{{/if}}</h3> <!--Jobs based on Your Skills-->
             </div>
             <div class="job-detail-container">
-                <a href="#">
-                    <div class="job-detail-content active">
+                {{#each postResults}}
+                <a href="{{lookup ../postRoutLink @index}}">
+                    <div class="job-detail-content">
                         <div class="company-logo-content">
                             <img src="/assets/image/company-logo.jpg" alt="company logo">
                         </div>
                         <div class="job-detail">
                             <div class="job-title">
-                                <span>HTML Developer</span>
+                                <span>{{jobTitle}}</span>
                             </div>
                             <div class="job-company-name">
-                                <span>Uplers</span>
+                                <span>{{companyName}}</span>
                             </div>
                             <div class="job-place">
-                                <span>Patna, Bihar, India</span>
+                                <span>{{city}} , {{country}}</span>
                             </div>
                             <div class="time-applicants">
-                                <span class="time">1 Week ago</span> | <span class="applicants">24 Applicants</span>
+                                <span class="time">{{postDateTime}}</span> | <span class="applicants">{{numbApplicants}} Applicants</span>
                             </div>
                         </div>
                     </div>
                 </a>
+                {{/each}}
                 {{!-- <a href="#">
                     <div class="job-detail-content">
                         <div class="company-logo-content">
@@ -63,15 +65,15 @@
             </div>
         </div>
         <div class="job-preview-apply">
+            {{#with idResults}}
             <div class="job-preview-detail">
                 <div class="job-title">
-                    <h4>HTML Developer</h4>
+                    <h4>{{jobTitle}}</h4>
                 </div>
                 <div class="job-detail">
-                    <span class="company">Uplers</span> |
-                    <span class="place">Patna, Bihar, India</span> |
-                    <span class="time">2 Weeks ago</span> |
-                    <span class="applicants">24 applicants</span>
+                    <span class="place">{{city}} , {{country}}</span> |
+                    <span class="time">{{postDateTime}}</span> |
+                    <span class="applicants">{{numbApplicants}} applicants</span>
                 </div>
             </div>
             <div class="job-posted-info">
@@ -81,7 +83,7 @@
                             <i class="fas fa-briefcase"></i>
                         </div>
                         <div class="name">
-                            <span>Full-Time Working</span>
+                            <span>{{workingType}}</span>
                         </div>
                     </div>
                     <div class="detail-type">
@@ -89,15 +91,16 @@
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="name">
-                            <span>Information Technology & Services</span>
+                            <span>{{companyName}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="job-apply-btn">
                     <a onclick="toggleform()" href="javascript:void(0)">Apply Now</a>
                 </div>
-
+                
             </div>
+            
             <div class="job-posted-by">
                 <div class="posted-by-mssg">
                     <span>Posted by</span>
@@ -108,33 +111,22 @@
                             <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
                         </div>
                         <div class="user-name-skill">
-                            <h1 class="user-name">Karan Jangir</h1>
-                            <h5 class="user-skill">Learner || Android Developer || Technical Writer || ...</h5>
+                            <h1 class="user-name">{{name}}</h1>
+                            <h5 class="user-skill">{{skills}}</h5>
                             <!-- we have to update latter -->
                             <!-- <h6 class="user-post-time"></h6> -->
                         </div>
                     </a>
                 </div>
                 <div class="post-content">
-                    <p class="post-content-para"> Hello everyone, <br />
-                        I am happy to share that my 10 articles have been published by GeeksforGeeks . Writing articles
-                        always helps us to enhance our skills and share our learnings with the whole world.
-                        GeeksForGeeks provides an amazing platform to learn, write and grow. <br />
-                        Aspiring ahead to write many more..... <br /><br />
-
-                        You can check all my articles here:
-                    </p>
-                    <p class="post-content-para"> Hello everyone, <br />
-                        I am happy to share that my 10 articles have been published by GeeksforGeeks . Writing articles
-                        always helps us to enhance our skills and share our learnings with the whole world.
-                        GeeksForGeeks provides an amazing platform to learn, write and grow. <br />
-                        Aspiring ahead to write many more..... <br /><br />
-
-                        You can check all my articles here:
+                    <p>
+                    <pre class="post-content-para">{{jobDesc}}</pre>
                     </p>
                 </div>
             </div>
+            {{/with}}
         </div>
+
         <div id="form-container" class="apply-now-form">
             <div class="container-form-apply">
                 <div class="form-apply-heading">
@@ -147,21 +139,21 @@
                             <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
                         </div>
                         <div class="user-name-skill">
-                            <h1 class="user-name">Karan Jangir</h1>
-                            <h5 class="user-skill">Learner || Android Developer || Technical Writer || ...</h5>
-                            <h6 class="user-place">India</h6>
+                            <h1 class="user-name">{{userResults.name}}</h1>
+                            <h5 class="user-skill">{{userResults.skills}}</h5>
+                            <h6 class="user-place">{{userResults.country}}</h6>
                             <!-- we have to update latter -->
                             <!-- <h6 class="user-post-time"></h6> -->
                         </div>
                     </a>
                 </div>
-                <form class="form" action="" method="POST">
+                <form class="form" action="/jobs/applyJobs" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="form-label">
                             <label for="email">Email</label>
                         </div>
                         <div class="form-input">
-                            <input type="email" value="piyushraj2340@gmail.com" name="email" id="email">
+                            <input type="email" value="{{userResults.email}}" name="email" id="email" required>
                         </div>
                     </div>
                     <div class="group-form">
@@ -394,7 +386,7 @@
                                 <label for="phone">Phone</label>
                             </div>
                             <div class="form-input">
-                                <input type="phone" value="7463980230" name="phone" id="phone">
+                                <input type="phone" value="{{userResults.mobile}}" name="phone" id="phone" required>
                             </div>
                         </div>
                     </div>
@@ -406,17 +398,31 @@
                             </label>
                         </div>
                         <div class="form-input">
-                            <input type="file" name="resume" id="resume">
+                            <input type="file" name="resume" id="resume" required>
                         </div>
                     </div>
                     <div class="form-submited">
                         <input type="submit" value="Apply Now">
                     </div>
                 </form>
+                
             </div>
         </div>
     </main>
     <script src="/assets/js/index.js"></script>
+    <script>
+        let elemJobDetailContent = document.getElementsByClassName('job-detail-content');
+        let idArray = window.location.pathname.split('-');
+        let id = parseInt(idArray[idArray.length - 1]);
+        if(isNaN(id)) {
+            elemJobDetailContent[0].style.backgroundColor = '#c9ddf7';
+        }
+        else {
+            
+            elemJobDetailContent[id].style.backgroundColor = '#c9ddf7';
+        }
+
+    </script>
 </body>
 
 </html>

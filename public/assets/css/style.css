@@ -1808,7 +1808,7 @@ jobSearch css code
 }
 
 .apply-now-form form input[type="submit"] {
-    max-width: 90%;
+    max-width: 100%;
     background: #677eff;
     color: #fff;
     cursor: pointer;
@@ -1868,4 +1868,295 @@ jobSearch css code
 .apply-now-form form .form-submited {
     display: flex;
     justify-content: center;
+}
+
+
+/*
+
+post job css code 
+
+*/
+
+
+.job-post-container {
+    padding: 0 8.5%;
+    /* border: 1px solid red; */
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
+    height: calc(100vh - 60px);
+}
+
+
+.job-post-container .post-container {
+    width: 100%;
+    height: 100%;
+    border-left : 1px solid rgb(0 0 0 / 15%); 
+    border-right : 1px solid rgb(0 0 0 / 15%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.job-post-container .post-container .info-based-skill {
+    padding: 10px 25px;
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-left: 3px solid #2867b2;
+    width: 100%;
+}
+
+.job-post-container .post-container .post-user-form {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.job-post-container .post-container .post-user-form::-webkit-scrollbar {
+	width: 10px;
+    /* border-radius: 12px; */
+}
+
+.job-post-container .post-container .post-user-form::-webkit-scrollbar-track {
+    background-color: #fefefe;
+}
+
+.job-post-container .post-container .post-user-form::-webkit-scrollbar-thumb {
+    background-color: rgb(0 0 0 / 15%);
+    border-radius: 5px / 10px;
+}
+.job-post-container .post-container .post-user-form::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
+
+.post-container .post-user-info {
+    padding: 20px 16px;
+}
+
+.post-container .post-user-info a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    
+}
+
+.post-container .profile-img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #efefef;
+    overflow: hidden;
+}
+
+.post-container .profile-img img {
+    width: 95%;
+    height: 95%;
+}
+
+.post-container .user-name-skill {
+    padding: 0 8px;
+}
+
+.post-container .user-name-skill h1 {
+    font-size: 14px;
+    color: #000;
+}
+
+.post-container .user-name-skill h1:hover {
+    text-decoration: underline;
+} 
+
+.post-container .user-name-skill h5 {
+    font-size: 12px;
+    color: #333;
+}
+
+.post-container .post-user-form form {
+    /* border: 1px solid rebeccapurple; */
+    width: 100%;
+    height: 100%;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+.post-container .post-user-form form .form-row-group {
+    /* border: 1px solid rebeccapurple; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.post-container .post-user-form form .form-row-group .form-col-group {
+    width: 100%;
+    margin: auto 10px;
+    /* border: 1px solid rebeccapurple; */
+}
+
+
+.post-container .post-user-form form .form-row-group .form-col-group input[type="text"],
+.post-container .post-user-form form .form-row-group .form-col-group input[type="number"],
+.post-container .post-user-form form .form-row-group .form-col-group input[type="submit"],
+.post-container .post-user-form form .form-row-group .form-col-group select,
+.post-container .post-user-form form .form-row-group .form-col-group textarea
+{
+    position: relative;
+    width: 100%;
+    padding: 10px 20px;
+    background: #f5f5f5;
+    color: #333;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 16px 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    border-radius: 4px;
+    background-color: rgb(214, 224, 224);
+}
+
+.post-container .post-user-form form .form-row-group .form-col-group input[type="submit"] {
+    max-width: 100%;
+    background: #677eff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    padding: 16px 26px;
+}
+
+
+.post-container .post-user-form form .form-row-group .form-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-container .post-user-form form .form-row-group .form-col-group input[type="submit"]:hover {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24), 0 3px 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.post-container .post-user-form form .form-row-group .form-col-group textarea {
+    min-width: 100%;
+    min-height: 200px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.post-container .post-user-form form .form-row-group .form-col-group input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+/* 
+
+footer css code 
+
+*/
+
+
+footer {
+    display: flex;
+    /* background-color: rgba(143, 250, 250, 0.3); */
+    justify-content: space-around;
+    flex-direction: column;
+    /* border: 1px solid red; */
+}
+
+footer .footer-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 30px;
+}
+
+.copy {
+    background-color: rgba(7, 167, 167, 0.2);
+    text-align: left;
+}
+
+.heading-footer h2 {
+    font-size: 55px;
+    font-family: Verdana;
+    color: rgb(9, 37, 37);
+}
+
+.course-footer,
+.support-foooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.course-footer a,
+.support-foooter a {
+    text-decoration: none;
+    color: rgb(9, 37, 37);
+    margin: 5px;
+}
+
+.course-footer a:hover,
+.support-foooter a:hover {
+    text-decoration: underline;
+}
+
+.course-footer h3,
+.support-foooter h3 {
+    font-size: 20px;
+    text-transform: capitalize;
+
+}
+
+footer .copy-social-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    /* border: 1px solid red; */
+    background-color: rgba(187, 212, 212, 0.3);
+}
+
+
+footer .copy-social-link a {
+    margin: 5px;
+    color: #aaa;
+}
+
+footer .copy-social-link .fb-link:hover {
+    color: #4267B2;
+}
+
+footer .copy-social-link .inst-link:hover {
+    color: #8a3ab9;
+}
+
+footer .copy-social-link .In-link:hover {
+    color: #2867b2;
+}
+
+footer .copy-social-link .youtb-link:hover {
+    color: #FF0000;
+}
+
+footer .copy-social-link .twit-link:hover {
+    color: #1DA1F2;
 }
