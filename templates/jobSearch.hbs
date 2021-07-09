@@ -2,11 +2,15 @@
 <html lang="en">
 
 <head>
-    <script src="https://kit.fontawesome.com/b8afffe50a.js" crossorigin="anonymous"></script>
     <title>Search a Jobs</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    {{>icon}}
+    {{>style}}
     <style>
-
+        #post-id {
+            visibility: hidden !important;
+            height: 0 !important;
+            width: 0 !important;
+        }
     </style>
 </head>
 
@@ -136,7 +140,7 @@
                 <div class="post-user-info">
                     <a href="#">
                         <div class="profile-img">
-                            <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
+                            <img src="/assets/image/profile.svg" alt="user-default profile">
                         </div>
                         <div class="user-name-skill">
                             <h1 class="user-name">{{userResults.name}}</h1>
@@ -148,6 +152,7 @@
                     </a>
                 </div>
                 <form class="form" action="/jobs/applyJobs" method="POST" enctype="multipart/form-data">
+                    <input type="number" name="postId" id="post-id" value="{{postId}}">
                     <div class="form-group">
                         <div class="form-label">
                             <label for="email">Email</label>
@@ -414,13 +419,14 @@
         let elemJobDetailContent = document.getElementsByClassName('job-detail-content');
         let idArray = window.location.pathname.split('-');
         let id = parseInt(idArray[idArray.length - 1]);
+        {{!-- document.getElementById('post-id').value = id; --}}
         if(isNaN(id)) {
             elemJobDetailContent[0].style.backgroundColor = '#c9ddf7';
         }
         else {
-            
             elemJobDetailContent[id].style.backgroundColor = '#c9ddf7';
         }
+
 
     </script>
 </body>

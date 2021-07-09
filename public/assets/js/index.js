@@ -33,8 +33,8 @@ function toggleLike(obj) {
 
 
 function toggleform() {
-    console.log(boolForm);
     let elem = document.getElementById('form-container');
+    
     if(boolForm) {
         elem.style.width = 0;
         elem.style.height = 0;

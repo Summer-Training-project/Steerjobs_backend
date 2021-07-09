@@ -1,37 +1,11 @@
-const mysql = require('mysql');
-// const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-// const authUser = require('../controllers/authUser');
+const db = require('../database/db');
+const verifyUserInfo = require('../database/verifyUserInfo');
+const loginInfo = require('../database/loginInfo');
 
-
-// const app = express();
-
-
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
-});
-
-db.connect((err) => {
-    if(err) {
-        console.log("DataBase is Disconected!.....");
-    }
-    else {
-        console.log("DataBase is Conected!.....");
-    }
-})
-
-const verifyUserInfo = (req, res) => {
-    const tooken = req.cookies.jwt;
-    const verifyUser = jwt.verify(tooken, process.env.JWT_SECRET);
-    return verifyUser.tokenId;
-}
 
 function generateAuthToken(tokenId) {
-    // console.log(`userId inside the gengeateAuthToken ${tokenId}`);
     const token = jwt.sign({ tokenId: tokenId }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN
     })
@@ -46,14 +20,9 @@ exports.login = async(req, res) => {
             if(!results[0] || !(await bcrypt.compare(password, results[0].password))) {
                 res.status(401).render('login', {
                     messageInfo: 'UserId or Password is incorrect',
-                    linkSigninAndProfile: '/login',
-                    linkSignupAndSignout: '/signup',
-                    signinAndProfile: 'SIGN-IN',
-                    signupAndSignout: 'Sign-Up'
                 })
             }
             else {
-                // console.log(`the userId inside the login module ${results[0].userId}`);
                 let token = generateAuthToken(results[0].userId);
 
                 const cookieOption = {
@@ -72,10 +41,6 @@ exports.login = async(req, res) => {
     catch(error) {
         res.status(401).render('login', {
             messageInfo: 'UserId or Password is incorrect',
-            linkSigninAndProfile: '/login',
-            linkSignupAndSignout: '/signup',
-            signinAndProfile: 'SIGN-IN',
-            signupAndSignout: 'Sign-Up'
         })
     }
 }
@@ -90,10 +55,6 @@ exports.register =(req, res) => {
         if(results.length > 0) {
             return res.render('signup', {
                 messageInfo: 'That Email is already in use',
-                linkSigninAndProfile: '/login',
-                linkSignupAndSignout: '/signup',
-                signinAndProfile: 'SIGN-IN',
-                signupAndSignout: 'Sign-Up'
             });
         }
 
@@ -104,33 +65,28 @@ exports.register =(req, res) => {
             if(results.length > 0) {
                 return res.render('signup', {
                     messageInfo: 'That userId is already in use',
-                    linkSigninAndProfile: '/login',
-                    linkSignupAndSignout: '/signup',
-                    signinAndProfile: 'SIGN-IN',
-                    signupAndSignout: 'Sign-Up'
                 });
             }
 
             let hashedPassword = await bcrypt.hash(password, 8);
 
             const token = generateAuthToken(userId);
-            const connectionTable = userId + 'Connection';
+            // const connectionTable = userId + 'Connection';
 
-            db.query(`CREATE TABLE ${connectionTable} ( id INT AUTO_INCREMENT PRIMARY KEY, connectionUserId VARCHAR(500), connectionStatus BOOLEAN)`, connectionTable , (error, results) => {
+            // db.query(`CREATE TABLE ${connectionTable} ( id INT AUTO_INCREMENT PRIMARY KEY, connectionUserId VARCHAR(500), connectionStatus BOOLEAN)`, connectionTable , (error, results) => {
+            //     if(error) {
+            //         console.log(error);
+            //     }
+            //     else {
+            //         console.log(results)
+            //     }
+            // });
+
+            db.query('INSERT INTO userinfo SET ?', {token: token, name: name, userId: userId, email: email, password: hashedPassword }, (error, infoResults) => {
                 if(error) {
                     console.log(error);
                 }
                 else {
-                    console.log(results)
-                }
-            });
-
-            db.query('INSERT INTO userinfo SET ?', {token: token, name: name, userId: userId, email: email, password: hashedPassword }, (error, results) => {
-                if(error) {
-                    console.log(error);
-                }
-                else {
-                    console.log(results);
                     
                     const cookieOption = {
                         expires: new Date(
@@ -143,10 +99,7 @@ exports.register =(req, res) => {
 
                     return res.render('userInfoForm', {
                         userName: name,
-                        linkSigninAndProfile: '/profile',
-                        linkSignupAndSignout: '/signout',
-                        signinAndProfile: name,
-                        signupAndSignout: 'Sign-Out'
+                        login: loginInfo(results),
                     });
                 }
             });

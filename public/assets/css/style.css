@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap');
+@font-face {
+    font-family: logo;
+    src: url('/assets/font/AGENTORANGE.TTF');
+}
 *
 {
     margin: 0;
@@ -39,31 +43,69 @@ nav a
     align-items: center;
     padding-right:8%;
 }
-.nav-logo-link 
-{
-   
-    margin: 40px;
-    text-decoration:none;
-    color:#000000;
-    padding: 8px 16px;
-    font-family:fantasy;
-    display: inline-block;
-    font-size: 16px;   
 
-}
-.nav-link
+.nav-logo .nav-logo-link 
 {
-    border: none;
+    font-size: 20px;
+    font-family: logo;
+    color: rgb(34 166 225);
+    transition: 0.5s color;
+}
+
+.nav-logo .nav-logo-link:hover {
+    filter: drop-shadow(0px 0px 10px rgb(34 166 225));
+}
+
+.nav-container-link .nav-link {
     border-radius: 3px;
-    color:rgb(0, 0, 0);
-    display:inline-block;
     cursor: pointer;
-
+    /* border: 1px solid red; */
 }
+
+
+.nav-container-link .nav-link-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.nav-link .profile-img {
+    margin-right: 10px;
+}
+
+.nav-link .profile-img, .nav-link .profile-img img {
+    height: 100%;
+}
+
+
+
 .nav-link:hover
 {
     background-color:rgba(214, 214, 214, 0.6);
 }
+
+.nav-bell {
+    border: 1px solid rgb(34 166 225);
+    filter: drop-shadow(0 0 7px rgb(34 166 225));
+    border-radius: 25% !important;
+    margin-right: 10px ;
+}
+
+.nav-bell span {
+    position: absolute;
+    top: -5px;
+    background-color: red;
+    color: #fff;
+    padding: 2px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+
+.nav-bell:hover  {
+    color: rgb(34 166 225);
+}
+
 .nav-link-signup
 {
     
@@ -2095,8 +2137,8 @@ footer .footer-container {
 
 .heading-footer h2 {
     font-size: 55px;
-    font-family: Verdana;
-    color: rgb(9, 37, 37);
+    font-family: logo;
+    color: rgb(34 166 225);
 }
 
 .course-footer,

@@ -1,11 +1,26 @@
 <nav class="nav">
     <div class="nav-logo">
-        <a class="nav-logo-link" href="/home"><b>SteerJobs</b></a>
+        <a id="nav-logo-link" class="nav-logo-link" href="/home">steerjobs</a>
     </div>
     <div class="nav-container-link">
+        {{#if login}}
         <a class="nav-link" href="/feed">Feed</a>
         <a class="nav-link" href="/about">ABOUT</a>
-        <a class="nav-link" href={{linkSigninAndProfile}}>{{signinAndProfile}}</a><!--SIGN-IN-->
-        <a class="nav-link-signup" href={{linkSignupAndSignout}}>{{signupAndSignout}}</a><!--Sign-Up-->
+        <a class="nav-link nav-link-profile" href="/profile">
+            <div class="profile-img">
+                <img  src={{login.profileImage}} alt="user-default profile"> <!--"/assets/image/profile.svg" -->
+            </div>
+            <div class="profile-name">
+                <span>{{login.profileName}}</span>
+            </div>
+        </a><!--SIGN-IN-->
+        <a class="nav-link nav-bell" href="javascript:void(0)" title="notification"><i class="fas fa-bell"></i> <span>{{login.notification}}</span></a>
+        <a class="nav-link-signup" href="/signout">Sign-Out</a><!--Sign-Up-->
+        {{else}}
+        <a class="nav-link" href="/about">ABOUT</a>
+        <a class="nav-link" href="/login">SIGN-IN</a><!--SIGN-IN-->
+        <a class="nav-link-signup" href="/signup">Sign-Up</a><!--Sign-Up-->
+        {{/if}}
+        
     </div>
 </nav>
