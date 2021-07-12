@@ -1254,7 +1254,7 @@ nav a
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/heading.png');
+    background-image: url('../image/heading.png');
     background-repeat: no-repeat;
     background-size: cover;
     padding: 30px 0 10px 0;
@@ -1689,6 +1689,10 @@ jobSearch css code
 
 .job-posted-by .post-content {
     padding: 8px 16px;
+}
+
+.job-posted-by .post-content pre {
+    white-space: pre-wrap;
 }
 
 
@@ -2201,4 +2205,35 @@ footer .copy-social-link .youtb-link:hover {
 
 footer .copy-social-link .twit-link:hover {
     color: #1DA1F2;
+}
+
+/* privacy policy */
+
+
+.privacy-container {
+    padding: 30px 20%;
+    font-family: Arial;
+}
+
+.privacy-container .heading {
+    text-align: center;
+    color: #000;
+    background-color: #efefef;
+}
+
+.privacy-container .heading h1 {
+    font-size: 50px;
+    text-align: center;
+}
+
+.privacy-container div {
+    padding: 16px 40px;
+    margin: 10px;
+}
+
+.privacy-container div:nth-child(odd) {
+    background-color: #ddd4dd;
+}
+.privacy-container div:nth-child(even) {
+    background-color: #dddfe0;
 }

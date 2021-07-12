@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+    {{>icon}}
     {{>style}}
     <style>
         .section, .nav {
@@ -555,7 +556,7 @@
                             <input type="text" name="skills" id="skills" placeholder="Skills Ex: HTML, CSS" required>
                         </div>
                         <div class="form-content form-submit">
-                            <input type="button" class="skip" value="Skip">
+                            <input onclick="location.replace('/feed')" type="button" class="skip" value="Skip">
                             <input type="submit" value="Next">
                         </div>
                     </div>

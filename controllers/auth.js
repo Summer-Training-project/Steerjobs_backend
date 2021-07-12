@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../database/db');
 const verifyUserInfo = require('../database/verifyUserInfo');
-const loginInfo = require('../database/loginInfo');
+const fs = require('fs');
+
 
 
 function generateAuthToken(tokenId) {
@@ -81,8 +82,9 @@ exports.register =(req, res) => {
             //         console.log(results)
             //     }
             // });
+            const databaseLink = `database_file/${userId}`;
 
-            db.query('INSERT INTO userinfo SET ?', {token: token, name: name, userId: userId, email: email, password: hashedPassword }, (error, infoResults) => {
+            db.query('INSERT INTO userinfo SET ?', {token, name, userId, email, password: hashedPassword, databaseLink }, (error, infoResults) => {
                 if(error) {
                     console.log(error);
                 }
@@ -97,10 +99,20 @@ exports.register =(req, res) => {
                 
                     res.cookie('jwt', token, cookieOption);
 
-                    return res.render('userInfoForm', {
-                        userName: name,
-                        login: loginInfo(results),
-                    });
+                    fs.mkdir(`database_file/${userId}`, function(err) {
+                        if (err) {
+                          console.log(err)
+                        } else {
+                            return res.render('userInfoForm', {
+                                userName: name,
+                                login: {
+                                    profileImage: '/assets/image/profile.svg',
+                                    profileName: name,
+                                    // notification: '',
+                                }
+                            });
+                        }
+                    })
                 }
             });
         });

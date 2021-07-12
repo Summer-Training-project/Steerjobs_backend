@@ -23,7 +23,7 @@
             </div>
             <div class="job-detail-container">
                 {{#each postResults}}
-                <a href="{{lookup ../postRoutLink @index}}">
+                <a href={{lookup ../postRoutLink @index}}>
                     <div class="job-detail-content">
                         <div class="company-logo-content">
                             <img src="/assets/image/company-logo.jpg" alt="company logo">
@@ -39,7 +39,7 @@
                                 <span>{{city}} , {{country}}</span>
                             </div>
                             <div class="time-applicants">
-                                <span class="time">{{postDateTime}}</span> | <span class="applicants">{{numbApplicants}} Applicants</span>
+                                <span class="time">{{lookup ../postTime @index}}</span> | <span class="applicants">{{numbApplicants}} Applicants</span>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="job-detail">
                     <span class="place">{{city}} , {{country}}</span> |
-                    <span class="time">{{postDateTime}}</span> |
+                    <span class="time">{{../postDateTime}}</span> |
                     <span class="applicants">{{numbApplicants}} applicants</span>
                 </div>
             </div>

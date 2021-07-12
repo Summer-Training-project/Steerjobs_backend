@@ -8,17 +8,18 @@ let rootPath = path.join(__dirname, '../');
 
 exports.postJobs = (req, res) => {
     const { jobTitle, companyName, city, country, numbApplicants, workingType, jobDesc } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
-    db.query('SELECT name, userId FROM userInfo WHERE userId = ?', [verifyUserInfo(req, res)], (error, results) => {
+    db.query('SELECT * FROM userInfo WHERE userId = ?', [verifyUserInfo(req, res)], (error, userResults) => {
         if (error) {
             console.log(error);
         }
         else {
-            const name = results[0].name;
-            const userId = results[0].userId;
+            const name = userResults[0].name;
+            const userId = userResults[0].userId;
+            const skills = userResults[0].skills;
 
-            db.query('INSERT INTO postJobs SET ?', { name, userId, jobTitle, companyName, city, country, numbApplicants, workingType, jobDesc }, (error, results) => {
+            db.query('INSERT INTO postJobs SET ?', { name, userId, skills , jobTitle, companyName, city, country, numbApplicants, workingType, jobDesc }, (error, postResults) => {
                 if (error) {
                     console.log(error);
                 }
@@ -26,7 +27,7 @@ exports.postJobs = (req, res) => {
                     res.render('postJob', {
                         InfoMessage: 'Great!..... Your Job has been posted',
                         InfoColor: '#28a745',
-                        login: loginInfo(results),
+                        login: loginInfo(userResults),
                     })
                 }
             });
