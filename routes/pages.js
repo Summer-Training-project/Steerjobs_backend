@@ -327,6 +327,114 @@ router.get('/jobs/jobs-posted-by-me', authUser('signup', '/signup'), (req, res) 
                                     return ('/resume/'+ fileName);
                                 })
 
+                                let maxResult = postResults.length;
+
+            for (let i = 0; i < maxResult; i++) {
+
+                router.get('/jobs/search-job/id-' + i, authUser('signup', '/signup'), (req, res) => {
+
+                    db.query('SELECT * FROM userinfo WHERE userId = ?', [verifyUserInfo(req, res)], (error, userResults) => {
+                        if (error) {
+                            console.log(error);
+                        }
+                        else {
+                            let routLink = postResults.map((elem, id) => {
+                                return '/jobs/search-job/id-' + id;
+                            });
+
+                            let postTime = postResults.map((elem, id) => {
+                                let timestamp = elem.postDateTime;
+                                let postDateTime = new Date(timestamp);
+                                let currentDateTime = new Date();
+
+                                // minutes 
+                                let currentMinutes = currentDateTime.getMinutes();
+                                let postMinutes = postDateTime.getMinutes();
+                                // Hours
+                                let currentHours = currentDateTime.getHours();
+                                let postHours = postDateTime.getHours();
+                                // Days 
+                                let currentDays = currentDateTime.getDate();
+                                let postDays = postDateTime.getDate();
+                                // weeks
+                                let currentWeeks = currentDateTime.getDay();
+                                let postWeeks = postDateTime.getDay();
+                                // months 
+                                let currentMonths = currentDateTime.getMonth();
+                                let postMonths = postDateTime.getMonth();
+                                // years
+                                let currentYears = currentDateTime.getFullYear();
+                                let postYears = postDateTime.getFullYear();
+
+                                let time;
+
+                                if ((currentYears - postYears) == 0) {
+                                    if ((currentMonths - postMonths) == 0) {
+                                        // if ((currentWeeks - postWeeks) == 0) {
+                                        if ((currentDays - postDays) == 0) {
+                                            if ((currentHours - postHours) == 0) {
+                                                time = currentMinutes - postMinutes + ' min ago';
+                                            }
+                                            else {
+                                                time = currentHours - postHours + ' hours ago';
+                                            }
+                                        }
+                                        else if ((currentDays - postDays) <= 6) {
+                                            time = currentDays - postDays + ' days ago';
+                                        }
+
+                                        else if ((currentDays - postDays) / 7 == 1) {
+                                            time = 1 + ' weeksago';
+                                        }
+
+                                        else if ((currentDays - postDays) / 7 == 2) {
+                                            time = 2 + ' weeksago';
+                                        }
+
+                                        else if ((currentDays - postDays) / 7 == 3) {
+                                            time = 3 + ' weeksago';
+                                        }
+
+                                        else {
+                                            time = currentWeeks - postWeeks + ' weeksago';
+
+                                        }
+                                        // }
+                                        // else if ((currentWeeks - postWeeks) <= 3) {
+                                        //     time = currentWeeks - postWeeks + ' weeks ago';
+                                        //     console.log('i am here');
+                                        // }
+                                        // else {
+                                        //     time = currentMonths - postMonths + ' months ago';
+                                        // }
+                                    }
+                                    else if ((currentMonths - postMonths) <= 11) {
+                                        time = currentMonths - postMonths + ' months ago';
+                                    }
+                                    else {
+                                        time = currentYears - postYears + 'years ago';
+                                    }
+                                }
+
+                                return time;
+                            });
+
+                            res.render('jobSearch', {
+                                userResults: userResults[0],
+                                postResults,
+                                login: loginInfo(userResults),
+                                postRoutLink: routLink,
+                                postTime: postTime,
+                                postDateTime: postTime[i],
+                                idResults: postResults[i],
+                                postId: postResults[i].id
+                            });
+                        }
+                    })
+
+                })
+            }
+
                                 
                                 res.render('jobSearch', {
                                     postResults,
