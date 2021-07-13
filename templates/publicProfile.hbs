@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Profile page</title>
+    {{>icon}}
+    {{>style}}
+    <style>
+        i {
+            font-size: 20px;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    {{>nav}}
+    <main class="container-main">
+        <div class="sidebar">
+            <h5>EXPLORE</h5>
+            <ul>
+                <li><a href="/home"><i class="fas fa-home"></i> <span class="icon-name">HOME</span></a></li>
+                <li><a href="/feed"><i class="far fa-newspaper"></i> <span class="icon-name"> FEED</span></a></li>
+                <li><a href="/connections"><i class="fas fa-users"></i> <span class="icon-name"> CONNECTIONS</span></a></li>
+                <li><a href="/notification"><i class="fas fa-bell"></i><span class="icon-name"> NOTIFICATION </span></a></li>
+                <li><a href="/bookmarks"><i class="fas fa-bookmark"></i> <span class="icon-name">FAVORITE </span></a></li>
+                <li><a href="/help"><i class="fas fa-hands-helping"></i> <span class="icon-name"> HELP </span></a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="container-left">
+                <div class="profile-and-name">
+                    <div class="container-left-picture">
+                        <div class="profile-image">
+                            <img src="/assets/image/profile.svg" alt="Sorry, your picture can't be loaded">
+                        </div>
+                    </div>
+                    <div class="container-left-heading">
+                        <h2>
+                            {{userName}}
+                        </h2>
+                    </div>
+                </div>
+                <div class="container-left-text">
+                    <h3 class="container-right-head">
+                        Education information
+                        <i class="fas fa-book-reader"></i>
+                    </h3>
+                    <div class="content-info">
+                        <div class="info-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="info-data">
+                            <div class="info-name">
+                                <span>{{userEducation}}</span>
+                            </div>
+                            <div class="info-title">
+                                <span>Current Education</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-info">
+                        <div class="info-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="info-data">
+                            <div class="info-name">
+                                <span>{{userInstitution}}</span>
+                            </div>
+                            <div class="info-title">
+                                <span>Institution</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-info">
+                        <div class="info-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="info-data">
+                            <div class="info-name">
+                                <span>{{userSkills}}</span>
+                            </div>
+                            <div class="info-title">
+                                <span>Skill</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-right">
+                <div class="post-or-update">
+                    <h3>Post and Update <i class="fas fa-calendar-week"></i></h3>
+                </div>
+                {{#if applyedJob}}
+                <div class="update">
+                    
+                </div>
+                {{else}} 
+                <div class="no-update">
+                    <h4>nothing available</h4>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

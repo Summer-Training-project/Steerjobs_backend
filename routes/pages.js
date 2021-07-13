@@ -3,6 +3,10 @@ const authUser = require('../controllers/authUser');
 const loginInfo = require('../database/loginInfo');
 const db = require('../database/db');
 const verifyUserInfo = require('../database/verifyUserInfo');
+const { applyJobs } = require('../controllers/jobs');
+const path = require('path');
+
+let rootPath = path.join(__dirname, '../');
 
 
 const router = express.Router();
@@ -109,9 +113,9 @@ router.get('/jobs/search-job', authUser('signup', '/signup'), (req, res) => {
                             // Days 
                             let currentDays = currentDateTime.getDate();
                             let postDays = postDateTime.getDate();
-                            // weeks
-                            let currentWeeks = currentDateTime.getDay();
-                            let postWeeks = postDateTime.getDay();
+                            // // weeks
+                            // let currentWeeks = currentDateTime.getDay();
+                            // let postWeeks = postDateTime.getDay();
                             // months 
                             let currentMonths = currentDateTime.getMonth();
                             let postMonths = postDateTime.getMonth();
@@ -121,30 +125,47 @@ router.get('/jobs/search-job', authUser('signup', '/signup'), (req, res) => {
 
                             let time;
 
+                            console.log()
+
                             if ((currentYears - postYears) == 0) {
                                 if ((currentMonths - postMonths) == 0) {
-                                    if ((currentWeeks - postWeeks) == 0) {
-                                        if ((currentDays - postDays) == 0) {
-                                            if ((currentHours - postHours) == 0) {
-                                                time = currentMinutes - postMinutes + ' min ago';
-                                            }
-                                            else {
-                                                time = currentHours - postHours + ' hours ago';
-                                            }
-                                        }
-                                        else if ((currentDays - postDays) <= 6) {
-                                            time = currentDays - postDays + ' days ago';
+                                    // if ((currentWeeks - postWeeks) == 0) {
+                                    if ((currentDays - postDays) == 0) {
+                                        if ((currentHours - postHours) == 0) {
+                                            time = currentMinutes - postMinutes + ' min ago';
                                         }
                                         else {
-                                            time = currentWeeks - postWeeks + ' weeksago';
+                                            time = currentHours - postHours + ' hours ago';
                                         }
                                     }
-                                    else if ((currentWeeks - postWeeks) <= 3) {
-                                        time = currentWeeks - postWeeks + ' weeks ago';
+                                    else if ((currentDays - postDays) <= 6) {
+                                        time = currentDays - postDays + ' days ago';
                                     }
+
+                                    else if ((currentDays - postDays) / 7 == 1) {
+                                        time = 1 + ' weeksago';
+                                    }
+
+                                    else if ((currentDays - postDays) / 7 == 2) {
+                                        time = 2 + ' weeksago';
+                                    }
+
+                                    else if ((currentDays - postDays) / 7 == 3) {
+                                        time = 3 + ' weeksago';
+                                    }
+
                                     else {
-                                        time = currentMonths - postMonths + ' months ago';
+                                        time = currentWeeks - postWeeks + ' weeksago';
+
                                     }
+                                    // }
+                                    // else if ((currentWeeks - postWeeks) <= 3) {
+                                    //     time = currentWeeks - postWeeks + ' weeks ago';
+                                    //     console.log('i am here');
+                                    // }
+                                    // else {
+                                    //     time = currentMonths - postMonths + ' months ago';
+                                    // }
                                 }
                                 else if ((currentMonths - postMonths) <= 11) {
                                     time = currentMonths - postMonths + ' months ago';
@@ -157,6 +178,23 @@ router.get('/jobs/search-job', authUser('signup', '/signup'), (req, res) => {
                             return time;
                         });
 
+                        let maxResult = postResults.length;
+
+                        for (let i = 0; i < maxResult; i++) {
+                            router.get('/jobs/search-job/id-' + i, authUser('signup', '/signup'), (req, res) => {
+                                res.render('jobSearch', {
+                                    userResults: userResults[0],
+                                    postResults,
+                                    login: loginInfo(userResults),
+                                    postRoutLink: routLink,
+                                    postTime: postTime,
+                                    postDateTime: postTime[i],
+                                    idResults: postResults[i],
+                                    postId: postResults[i].id
+                                });
+                            })
+                        }
+
                         res.render('jobSearch', {
                             userResults: userResults[0],
                             postResults,
@@ -167,6 +205,141 @@ router.get('/jobs/search-job', authUser('signup', '/signup'), (req, res) => {
                             idResults: postResults[0],
                             postId: postResults[0].id
                         });
+                    }
+                }
+            })
+
+        }
+    });
+});
+
+
+router.get('/jobs/jobs-posted-by-me', authUser('signup', '/signup'), (req, res) => {
+    db.query('SELECT * FROM userinfo WHERE userId = ?', [verifyUserInfo(req, res)], (error, userResults) => {
+        if (error) {
+            res.send('Something Went Wrong!....');
+        }
+        else {
+            db.query('SELECT * FROM postJobs WHERE userId = ?', [userResults[0].userId], (error, postResults) => {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    if (!postResults[0]) {
+                        res.render('jobSearch', {
+                            messageInfo: 'There is no post to be displayed',
+                            colorCode: '#dc3545',
+                            login: loginInfo(userResults)
+                        })
+                    }
+                    else {
+                        db.query('SELECT * FROM applyJobs WHERE postUserId = ? ', [userResults[0].userId], (error, applyResults) => {
+                            if (error) {
+                                console.log(error);
+                            }
+                            else {
+                                let postTime = postResults.map((elem, id) => {
+                                    let timestamp = elem.postDateTime;
+                                    let postDateTime = new Date(timestamp);
+                                    let currentDateTime = new Date();
+
+                                    // minutes 
+                                    let currentMinutes = currentDateTime.getMinutes();
+                                    let postMinutes = postDateTime.getMinutes();
+                                    // Hours
+                                    let currentHours = currentDateTime.getHours();
+                                    let postHours = postDateTime.getHours();
+                                    // Days 
+                                    let currentDays = currentDateTime.getDate();
+                                    let postDays = postDateTime.getDate();
+                                    // // weeks
+                                    // let currentWeeks = currentDateTime.getDay();
+                                    // let postWeeks = postDateTime.getDay();
+                                    // months 
+                                    let currentMonths = currentDateTime.getMonth();
+                                    let postMonths = postDateTime.getMonth();
+                                    // years
+                                    let currentYears = currentDateTime.getFullYear();
+                                    let postYears = postDateTime.getFullYear();
+
+                                    let time;
+
+
+                                    if ((currentYears - postYears) == 0) {
+                                        if ((currentMonths - postMonths) == 0) {
+                                            // if ((currentWeeks - postWeeks) == 0) {
+                                            if ((currentDays - postDays) == 0) {
+                                                if ((currentHours - postHours) == 0) {
+                                                    time = currentMinutes - postMinutes + ' min ago';
+                                                }
+                                                else {
+                                                    time = currentHours - postHours + ' hours ago';
+                                                }
+                                            }
+                                            else if ((currentDays - postDays) <= 6) {
+                                                time = currentDays - postDays + ' days ago';
+                                            }
+
+                                            else if ((currentDays - postDays) / 7 == 1) {
+                                                time = 1 + ' weeksago';
+                                            }
+
+                                            else if ((currentDays - postDays) / 7 == 2) {
+                                                time = 2 + ' weeksago';
+                                            }
+
+                                            else if ((currentDays - postDays) / 7 == 3) {
+                                                time = 3 + ' weeksago';
+                                            }
+
+                                            else {
+                                                time = currentWeeks - postWeeks + ' weeksago';
+
+                                            }
+                                            // }
+                                            // else if ((currentWeeks - postWeeks) <= 3) {
+                                            //     time = currentWeeks - postWeeks + ' weeks ago';
+                                            //     console.log('i am here');
+                                            // }
+                                            // else {
+                                            //     time = currentMonths - postMonths + ' months ago';
+                                            // }
+                                        }
+                                        else if ((currentMonths - postMonths) <= 11) {
+                                            time = currentMonths - postMonths + ' months ago';
+                                        }
+                                        else {
+                                            time = currentYears - postYears + 'years ago';
+                                        }
+                                    }
+
+                                    return time;
+                                });
+
+                                let fileName = applyResults.map((elem) => {
+                                    let splitString = elem.rusumePath.split('_');
+                                    return splitString[splitString.length - 1];
+                                }) 
+
+                                let filePath = applyResults.map((elem) => {
+                                    let splitString = elem.rusumePath.split('/');
+                                    let fileName =  splitString[splitString.length - 1];
+                                    return ('/resume/'+ fileName);
+                                })
+
+                                
+                                res.render('jobSearch', {
+                                    postResults,
+                                    applyJobs: applyResults,
+                                    jobTitle: postResults[0].jobTitle,
+                                    companyName: postResults[0].companyName,
+                                    postTime: postTime,
+                                    fileName: fileName,
+                                    filePath: filePath,
+                                    login: loginInfo(userResults),
+                                });
+                            }
+                        })
                     }
                 }
             })
@@ -228,28 +401,43 @@ db.query('SELECT * FROM postJobs', (error, postResults) => {
 
                                 if ((currentYears - postYears) == 0) {
                                     if ((currentMonths - postMonths) == 0) {
-                                        if ((currentWeeks - postWeeks) == 0) {
-                                            if ((currentDays - postDays) == 0) {
-                                                if ((currentHours - postHours) == 0) {
-                                                    time = currentMinutes - postMinutes + ' min ago';
-                                                }
-                                                else {
-                                                    time = currentHours - postHours + ' hours ago';
-                                                }
-                                            }
-                                            else if ((currentDays - postDays) <= 6) {
-                                                time = currentDays - postDays + ' days ago';
+                                        // if ((currentWeeks - postWeeks) == 0) {
+                                        if ((currentDays - postDays) == 0) {
+                                            if ((currentHours - postHours) == 0) {
+                                                time = currentMinutes - postMinutes + ' min ago';
                                             }
                                             else {
-                                                time = currentWeeks - postWeeks + ' weeksago';
+                                                time = currentHours - postHours + ' hours ago';
                                             }
                                         }
-                                        else if ((currentWeeks - postWeeks) <= 3) {
-                                            time = currentWeeks - postWeeks + ' weeks ago';
+                                        else if ((currentDays - postDays) <= 6) {
+                                            time = currentDays - postDays + ' days ago';
                                         }
+
+                                        else if ((currentDays - postDays) / 7 == 1) {
+                                            time = 1 + ' weeksago';
+                                        }
+
+                                        else if ((currentDays - postDays) / 7 == 2) {
+                                            time = 2 + ' weeksago';
+                                        }
+
+                                        else if ((currentDays - postDays) / 7 == 3) {
+                                            time = 3 + ' weeksago';
+                                        }
+
                                         else {
-                                            time = currentMonths - postMonths + ' months ago';
+                                            time = currentWeeks - postWeeks + ' weeksago';
+
                                         }
+                                        // }
+                                        // else if ((currentWeeks - postWeeks) <= 3) {
+                                        //     time = currentWeeks - postWeeks + ' weeks ago';
+                                        //     console.log('i am here');
+                                        // }
+                                        // else {
+                                        //     time = currentMonths - postMonths + ' months ago';
+                                        // }
                                     }
                                     else if ((currentMonths - postMonths) <= 11) {
                                         time = currentMonths - postMonths + ' months ago';
@@ -306,15 +494,23 @@ router.get('/database', (req, res) => {
 
 
 router.get('/feed', authUser('index', '/home'), (req, res) => {
-    db.query('SELECT * FROM userinfo WHERE userId = ?', [verifyUserInfo(req, res)], (error, results) => {
+    db.query('SELECT * FROM userinfo WHERE userId = ?', [verifyUserInfo(req, res)], (error, userResults) => {
         if (error) {
             res.send('Something Went Wrong!....');
         }
         else {
-            res.render('feed', {
-                login: loginInfo(results),
-                userName: results[0].name
-            });
+            db.query('SELECT * FROM postJobs LIMIT 5', (error, postResults) => {
+
+                let routLink = postResults.map((elem, id) => {
+                    return '/jobs/search-job/id-' + id;
+                });
+                res.render('feed', {
+                    login: loginInfo(userResults),
+                    userName: userResults[0].name,
+                    postResults,
+                    postRoutLink: routLink
+                });
+            })
         }
     });
 });
@@ -375,6 +571,30 @@ router.get('/profile', authUser('login', '/login'), (req, res) => {
         }
     });
 });
+
+router.get('/profile/public/:id', authUser('login', '/login'), (req, res) => {
+    db.query('SELECT * FROM userinfo WHERE userId = ?', [verifyUserInfo(req, res)], (error, userResults) => {
+        const userId = req.params.id;
+
+        db.query('SELECT * FROM userInfo where userId = ?', [userId], (error, SearchResults) => {
+            if (error || !SearchResults[0]) {
+                res.render('404', {
+                    login: loginInfo(userResults)
+                });
+            }
+            else {
+
+                res.render('publicProfile', {
+                    userEducation: SearchResults[0].education,
+                    userInstitution: SearchResults[0].institution,
+                    userSkills: SearchResults[0].skills,
+                    login: loginInfo(userResults),
+                })
+            }
+        })
+    })
+
+})
 
 
 module.exports = router;

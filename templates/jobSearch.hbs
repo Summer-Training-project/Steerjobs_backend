@@ -19,7 +19,18 @@
     <main class="job-search-container">
         <div class="job-list-container">
             <div style="color: {{colorCode}}; border-left-color: {{colorCode}};" class="info-based-skill">
-                <h3>{{#if messageInfo}}{{messageInfo}}{{else}}Jobs based on Your Skills{{/if}}</h3> <!--Jobs based on Your Skills-->
+                <h3>{{#if messageInfo}}{{messageInfo}}{{else}}Jobs based on Your Skills{{/if}}</h3>
+                <!--Jobs based on Your Skills-->
+                {{#if postResults}}
+                <span id="sort-menu-btn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </span>
+                {{/if}}
+            </div>
+            <div id="sort-menu-container" class="sort-menu">
+                <h4>Filter Jobs</h4>
+                <a href="/jobs/jobs-posted-by-me">Job posted by me</a>
+                <a href="/jobs/search-job">All Jobs</a>
             </div>
             <div class="job-detail-container">
                 {{#each postResults}}
@@ -39,36 +50,17 @@
                                 <span>{{city}} , {{country}}</span>
                             </div>
                             <div class="time-applicants">
-                                <span class="time">{{lookup ../postTime @index}}</span> | <span class="applicants">{{numbApplicants}} Applicants</span>
+                                <span class="time">{{lookup ../postTime @index}}</span> | <span
+                                    class="applicants">{{numbApplicants}} Applicants</span>
                             </div>
                         </div>
                     </div>
                 </a>
                 {{/each}}
-                {{!-- <a href="#">
-                    <div class="job-detail-content">
-                        <div class="company-logo-content">
-                            <img src="company-logo.jpg" alt="company logo">
-                        </div>
-                        <div class="job-detail">
-                            <div class="job-title">
-                                <span>HTML Developer</span>
-                            </div>
-                            <div class="job-company-name">
-                                <span>Uplers</span>
-                            </div>
-                            <div class="job-place">
-                                <span>Patna, Bihar, India</span>
-                            </div>
-                            <div class="time-applicants">
-                                <span class="time">1 Week ago</span> | <span class="applicants">24 Applicants</span>
-                            </div>
-                        </div>
-                    </div>
-                </a> --}}
             </div>
         </div>
         <div class="job-preview-apply">
+            {{#if idResults}}
             {{#with idResults}}
             <div class="job-preview-detail">
                 <div class="job-title">
@@ -102,15 +94,15 @@
                 <div class="job-apply-btn">
                     <a onclick="toggleform()" href="javascript:void(0)">Apply Now</a>
                 </div>
-                
+
             </div>
-            
+
             <div class="job-posted-by">
                 <div class="posted-by-mssg">
                     <span>Posted by</span>
                 </div>
                 <div class="post-user-info">
-                    <a href="#">
+                    <a href="/profile/public/{{userId}}">
                         <div class="profile-img">
                             <img src="https://freesvg.org/img/1538346433.png" alt="user-default profile">
                         </div>
@@ -129,8 +121,72 @@
                 </div>
             </div>
             {{/with}}
+            {{/if}}
+            {{#if applyJobs}}
+            {{#each applyJobs}}
+            <div class="applyed-result">
+                <h2>Enrolled Application <i class="fas fa-users"></i></h2>
+                <div class="applyed-job">
+                    <div class="applyed-by-mssg">
+                        <span>Submited by</span>
+                    </div>
+                    <div class="applyed-user">
+                        <div class="apply-user-info" id="toggle-collapsed">
+                            <a href="/profile/public/{{applyUserId}}">
+                                <div class="profile-img">
+                                    <img src="/assets/image/profile.svg" alt="user-default profile">
+                                </div>
+                                <div class="user-name-skill">
+                                    <h1 class="user-name">{{applyName}}</h1>
+                                    <h5 class="user-skill">{{applySkills}}</h5>
+                                </div>
+                            </a>
+                            <span id="collapsed-btn">+</span>
+                        </div>
+                        <div id="applyed-info" class="applyed-info">
+                            <div class="row-data job-title">
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-data">
+                                    <div class="info-name">
+                                        <span>{{applyEmail}}</span>
+                                    </div>
+                                    <div class="info-title">
+                                        <span>Email</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-data job-title">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="info-data">
+                                    <div class="info-name">
+                                        <span>{{applyMobile}}</span>
+                                    </div>
+                                    <div class="info-title">
+                                        <span>Mobile</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-data resume-file">
+                                <div class="file-name">
+                                    <h3>{{lookup ../fileName @index}}</h3>
+                                </div>
+                                <div class="file-btn">
+                                    <a href="{{lookup ../filePath @index}}">Open</a>
+                                    <a href="{{lookup ../filePath @index}}" download>download</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            {{/if}}
         </div>
-
+        {{#if idResults}}
         <div id="form-container" class="apply-now-form">
             <div class="container-form-apply">
                 <div class="form-apply-heading">
@@ -167,7 +223,7 @@
                                 <label for="countryCode">Phone Country Code</label>
                             </div>
                             <div class="form-input">
-                                <select name="countryCode" id="countryCode" required >
+                                <select name="countryCode" id="countryCode" required>
                                     <option value="+213">+213</option>
                                     <option value="+376">+376</option>
                                     <option value="+244">+244</option>
@@ -382,7 +438,7 @@
                                     <option value="+967">+967</option>
                                     <option value="+260">+260</option>
                                     <option value="+263">+263</option>
-    
+
                                 </select>
                             </div>
                         </div>
@@ -410,24 +466,58 @@
                         <input type="submit" value="Apply Now">
                     </div>
                 </form>
-                
+
             </div>
         </div>
+        {{/if}}
     </main>
     <script src="/assets/js/index.js"></script>
     <script>
         let elemJobDetailContent = document.getElementsByClassName('job-detail-content');
         let idArray = window.location.pathname.split('-');
         let id = parseInt(idArray[idArray.length - 1]);
-        {{!-- document.getElementById('post-id').value = id; --}}
-        if(isNaN(id)) {
+        if (isNaN(id)) {
             elemJobDetailContent[0].style.backgroundColor = '#c9ddf7';
         }
         else {
             elemJobDetailContent[id].style.backgroundColor = '#c9ddf7';
         }
 
+        {{#if postResults}}
+        let bool = false;
+        let elemSortBtn = document.getElementById('sort-menu-btn').addEventListener('click', toggleSort);
+        function toggleSort() {
+            let elemSortCont = document.getElementById('sort-menu-container')
+            if (!bool) {
+                elemSortCont.style.display = 'flex';
+                bool = !bool;
+            }
+            else {
+                elemSortCont.style.display = 'none';
+                bool = !bool;
+            }
+        }
 
+        let boolColl = false;
+        let elemToggleCollapsed = document.getElementById('toggle-collapsed')
+        elemToggleCollapsed.addEventListener('click', toggleCollapsed);
+        let elemCollapsedBtn = document.getElementById('collapsed-btn');
+        let elemApplyInfo = document.getElementById('applyed-info');
+
+        function toggleCollapsed() {
+            if(!boolColl) {
+                elemCollapsedBtn.innerHTML = '-';
+                elemApplyInfo.style.display = 'block';
+                boolColl = !boolColl;
+            }
+            else {
+                elemCollapsedBtn.innerHTML = '+';
+                elemApplyInfo.style.display = 'none';
+                boolColl = !boolColl;
+            }
+        }
+
+        {{/if}}
     </script>
 </body>
 

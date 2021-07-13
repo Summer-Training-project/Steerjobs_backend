@@ -140,44 +140,28 @@
         <aside class="feed-right-container">
             <div class="jobs">
                 <ul>
+                    
                     <div class="top-jobs-list">
                         <h3>Finds Jobs</h3>
-                        <a class="nav-list-jobs" href="#">
+                        {{#if postResults}} 
+                        {{#each postResults}}
+                        <a class="nav-list-jobs" href={{lookup ../postRoutLink @index}}>
                             <li>
-                                <h4>Techops Engineer</h4>
-                                <h5>airtel | Gurugram, Haryana, India.</h5>
-                                <h6>178 applicants</h6>
+                                <h4>{{jobTitle}}</h4>
+                                <h5>{{companyName}} | {{city}} , {{country}}</h5>
+                                <h6>{{numbApplicants}} applicants</h6>
                             </li>
                         </a>
-                        <a class="nav-list-jobs" href="#">
-                            <li>
-                                <h4>Techops Engineer</h4>
-                                <h5>airtel | Gurugram, Haryana, India.</h5>
-                                <h6>178 applicants</h6>
+                        {{/each}}
+                        {{else}}
+                        <a style="border-left: 2px solid #dc3545; " class="nav-list-jobs" href="/jobs/search-job">
+                            <li style="list-style-type: none">
+                                <h4 style="color: #dc3545;;">There is no post to be displayed</h4>
                             </li>
                         </a>
-                        <a class="nav-list-jobs" href="#">
-                            <li>
-                                <h4>Techops Engineer</h4>
-                                <h5>airtel | Gurugram, Haryana, India.</h5>
-                                <h6>178 applicants</h6>
-                            </li>
-                        </a>
-                        <a class="nav-list-jobs" href="#">
-                            <li>
-                                <h4>Techops Engineer</h4>
-                                <h5>airtel | Gurugram, Haryana, India.</h5>
-                                <h6>178 applicants</h6>
-                            </li>
-                        </a>
-                        <a class="nav-list-jobs" href="#">
-                            <li>
-                                <h4>Techops Engineer</h4>
-                                <h5>airtel | Gurugram, Haryana, India.</h5>
-                                <h6>178 applicants</h6>
-                            </li>
-                        </a>
+                        {{/if}}
                     </div>
+                    
                 </ul>
             </div>
             <div class="footer-feed">

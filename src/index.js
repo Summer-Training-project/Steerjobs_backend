@@ -51,6 +51,7 @@ app.use('/jobs', require(path.join(rootPath, '/routes/jobs')));
 
 
 app.use(express.static(path.join(rootPath, 'public')));
+app.use(express.static(path.join(rootPath, 'database_file')));
 
 
 app.get('*',authUser('404'),(req,res) => {
